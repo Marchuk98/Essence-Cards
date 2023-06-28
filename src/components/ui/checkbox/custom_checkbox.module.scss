@@ -1,0 +1,28 @@
+.checkBox__block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 1.5rem;
+  margin: 0.5rem;
+
+  .checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: inherit;
+
+
+    background: none;
+    border: 2px solid var(--color-light-900);
+    border-radius: 4px;
+
+    &.checked {
+      color: var(--color-dark-900);
+      background: var(--color-light-900);
+
+    }
+  }
+}
+
+
+
