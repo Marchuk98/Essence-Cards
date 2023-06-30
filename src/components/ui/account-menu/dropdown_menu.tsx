@@ -9,7 +9,7 @@ export const CustomDropdownMenu = () => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className={s.IconButton} aria-label="Customise options">
-          <UserAvatar />
+          <UserAvatar name={'Alexey'} />
         </button>
       </DropdownMenu.Trigger>
 

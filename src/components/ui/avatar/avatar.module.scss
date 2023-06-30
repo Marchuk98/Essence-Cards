@@ -1,6 +1,6 @@
 .wrapper{
   display: flex;
-  gap:5px;
+  gap:14px;
 }
 
 .label_wrapper{
@@ -8,6 +8,12 @@
   flex-wrap: wrap;
   gap:5px;
   align-items: center;
+}
+
+.LabelRoot{
+  cursor: pointer;
+  padding: 5px 0;
+  border-bottom: 2px dashed;
 }
 
 

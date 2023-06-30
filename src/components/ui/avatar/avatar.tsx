@@ -14,7 +14,7 @@ export const UserAvatar = (props: UserAvatarProps) => {
     <div className={s.wrapper}>
       {name && (
         <div className={s.label_wrapper}>
-          <Label.Root className="LabelRoot" htmlFor="firstName">
+          <Label.Root className={s.LabelRoot} htmlFor="firstName">
             {name}
           </Label.Root>
         </div>

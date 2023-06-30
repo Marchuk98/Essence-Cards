@@ -71,27 +71,21 @@ button {
 }
 
 .IconButton {
+  cursor: pointer;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 35px;
-  height: 35px;
-
   font-family: inherit;
   color: var(--violet-11);
 
-  background-color: white;
   border-radius: 100%;
-  box-shadow: 0 2px 10px var(--black-a7);
+  box-shadow: none;
 }
 
 .IconButton:hover {
   background-color: var(--violet-3);
-}
-
-.IconButton:focus {
-  box-shadow: 0 0 0 2px black;
 }
 
 .RightSlot {
