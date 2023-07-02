@@ -21,6 +21,7 @@ const meta = {
         'overline',
         'link_1',
         'link_2',
+        'error',
       ],
       control: { type: 'radio' },
     },
@@ -116,5 +117,12 @@ export const Link_2: Story = {
     as: 'a',
     variant: 'link_2',
     children: 'Causerie Test Zurich Weatherstripped 31 8004 Zurich, ZH, CH',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    variant: 'error',
+    children: 'This is an error message',
   },
 }

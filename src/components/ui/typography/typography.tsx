@@ -17,6 +17,7 @@ export type TypographyPropsType<T extends ElementType = 'p'> = {
     | 'overline'
     | 'link_1'
     | 'link_2'
+    | 'error'
   children?: ReactNode
   className?: string
 } & ComponentPropsWithoutRef<'p'>
