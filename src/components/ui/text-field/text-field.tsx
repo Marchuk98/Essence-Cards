@@ -13,7 +13,7 @@ export type InputPropsType<T extends ElementType = 'input'> = {
   variant?: 'default' | 'password' | 'search'
   className?: string
   children?: ReactNode
-  error?: boolean
+  errorMessage?: string
   label?: string
 } & ComponentPropsWithoutRef<'input'>
 
@@ -25,21 +25,19 @@ export const TextField = <T extends ElementType = 'input'>(
     as: Component = 'input',
     className,
     children,
-    error,
+    errorMessage,
     label,
     ...rest
   } = props
-  const [err, setErr] = useState(error)
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const styles = {
-    container: s.container,
+    wrapper: clsx(s.wrapper, { [s.error]: errorMessage }),
     labelField: s.label_field,
-    wrapper: clsx(s.wrapper, { [s.error]: error }),
-    field: clsx(s.field, { [s._search]: variant === 'search' }),
+    field: clsx(s.field, !!errorMessage && s.error, className),
     icon: s.icon,
-    input: clsx(s[variant], { [s.error]: err }),
-    error: clsx(s.error, { [s.error]: err }),
+    input: clsx(s[variant], { [s.error]: errorMessage }),
+    error: clsx(s.error),
   }
 
   const togglePasswordVisibility = () => {
@@ -55,13 +53,12 @@ export const TextField = <T extends ElementType = 'input'>(
   }
 
   return (
-    <div className={styles.container}>
+    <>
       {label && (
         <Typography variant={'body_2'} as={'label'}>
           {label}
         </Typography>
       )}
-
       <div className={styles.wrapper} tabIndex={0}>
         <div className={styles.field}>
           {variant === 'password' && (
@@ -77,13 +74,9 @@ export const TextField = <T extends ElementType = 'input'>(
           </div>
         </div>
       </div>
-      <span
-        onClick={() => setErr(false)}
-        style={{ color: 'var(--color-danger-300)' }}
-        className={styles.error}
-      >
-        {err && <Typography variant={'error'}>ERROR!</Typography>}
-      </span>
-    </div>
+      <Typography variant={'error'} className={styles.error}>
+        {errorMessage}
+      </Typography>
+    </>
   )
 }
