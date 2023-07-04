@@ -29,6 +29,6 @@ export const CheckBox_Checked: Story = {
 
 export const CheckBox_With_Description: Story = {
   args: {
-    description: 'Check-box',
+    label: 'Check-box',
   },
 }

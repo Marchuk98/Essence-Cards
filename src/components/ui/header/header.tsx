@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
-import { LogoCardProject } from '../../../images/svg/icons'
+import { LogoCardProject, Logout } from '../../../images/svg/icons'
 
-import { CustomDropdownMenu } from '../account-menu'
+import { CustomDropdownMenu, DropdownItemWithIcon } from '../account-menu'
 import { Button } from '../button'
 
 import s from './header.module.scss'
+import { UserAvatar } from '../avatar'
+import { ProfileIcon } from '../../../images/svg/icons/ProfileSvg.tsx'
 
 // export type HeaderProps = {
 //   children?: ReactNode
@@ -22,11 +24,21 @@ export const Header = () => {
   return (
     <header className={s.wrapper}>
       <div className={s.container}>
-        <div>
+        <>
           <LogoCardProject />
-        </div>
+        </>
         {isLoggedIn ? (
-          <CustomDropdownMenu />
+          <CustomDropdownMenu
+            trigger={
+              <button className={s.IconButton} aria-label="Customise options">
+                <UserAvatar/>
+              </button>
+            }
+          >
+            <DropdownItemWithIcon icon={<ProfileIcon />} text="My Profile" />
+            <DropdownItemWithIcon icon={''} text="Pack" />
+            <DropdownItemWithIcon icon={<Logout />} text="Logout" />
+          </CustomDropdownMenu>
         ) : (
           <Button variant={'primary'} onClick={onClickHandler}>
             Sign In
@@ -34,9 +46,5 @@ export const Header = () => {
         )}
       </div>
     </header>
-
-    // <header className={s.wrapper}>
-    //   <div className={s.container}>{children}</div>
-    // </header>
   )
 }

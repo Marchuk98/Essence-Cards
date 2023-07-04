@@ -7,23 +7,30 @@ import * as Checkbox from '@radix-ui/react-checkbox'
 import s from './custom_checkbox.module.scss'
 
 export type CheckboxProps = {
-  description?: string
   checked?: boolean
+  label?: string
+  onChange?: (checked: boolean) => void
+  errorMessage?: string
 }
 
 export const CustomCheckbox = (props: CheckboxProps) => {
-  const { description, checked } = props
+  const { checked, label, onChange, errorMessage } = props
 
   return (
     <>
-      <Checkbox.Root className={s.checkbox} checked={checked}>
+      <Checkbox.Root className={s.checkbox} checked={checked} onCheckedChange={onChange}>
         <Checkbox.Indicator className={s.indicator}>
           <CheckMark />
         </Checkbox.Indicator>
       </Checkbox.Root>
-      <label className={s.label} htmlFor="c1">
-        <Typography variant={'body_2'}>{description}</Typography>
-      </label>
+      <Typography variant={'body_2'} className={s.label}>
+        {label}
+      </Typography>
+      {errorMessage && (
+        <Typography variant={'error'} className={s.error}>
+          {errorMessage}
+        </Typography>
+      )}
     </>
   )
 }
