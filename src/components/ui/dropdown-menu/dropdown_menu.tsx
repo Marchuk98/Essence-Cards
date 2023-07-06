@@ -1,23 +1,19 @@
-import { ComponentPropsWithoutRef, CSSProperties, ReactNode, useState } from 'react'
+import { CSSProperties, ReactNode, useState, FC, ComponentPropsWithoutRef } from 'react'
 
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
-
+import { clsx } from 'clsx'
 import { AnimatePresence, motion, MotionProps, Variants } from 'framer-motion'
 
+import s from './dropdown_menu.module.scss'
 import { Typography } from '../typography'
 
-import clsx from 'clsx'
-
-import s from './dropdown_menu.module.scss'
-import { More } from '../../../images/svg/icons/MoreSvg.tsx'
-
-type CustomDropdownMenuProps = {
+export type DropdownProps = {
+  children: ReactNode
   trigger?: ReactNode
-  children?: ReactNode
+  align?: 'start' | 'center' | 'end'
   className?: string
   style?: CSSProperties
 }
-
 const menu = {
   closed: {
     scale: 0,
@@ -44,8 +40,13 @@ const item = {
   transition: { opacity: { duration: 0.2 } },
 } satisfies MotionProps
 
-export const CustomDropdownMenu = (props: CustomDropdownMenuProps) => {
-  const { trigger, className, children, style } = props
+export const CustomDropdownMenu = ({
+  children,
+  trigger,
+  align = 'end',
+  className,
+  style,
+}: DropdownProps) => {
   const [open, setOpen] = useState(false)
 
   const classNames = {
@@ -58,23 +59,18 @@ export const CustomDropdownMenu = (props: CustomDropdownMenuProps) => {
 
   return (
     <DropdownMenuRadix.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenuRadix.Trigger asChild>
-        {trigger ?? (
-          <button className={classNames.button}>
-            <More />
-          </button>
-        )}
-      </DropdownMenuRadix.Trigger>
+      <DropdownMenuRadix.Trigger asChild>{trigger}</DropdownMenuRadix.Trigger>
       <AnimatePresence>
         {open && (
           <DropdownMenuRadix.Portal forceMount>
             <DropdownMenuRadix.Content
-              className={className}
+              asChild
               forceMount
+              className={classNames.content}
+              align={align}
+              sideOffset={8}
               style={style}
-              sideOffset={5}
-              align={'end'}
-              alignOffset={5}
+              onClick={event => event.stopPropagation()}
             >
               <motion.div
                 animate={open ? 'open' : 'closed'}
@@ -98,13 +94,18 @@ export const CustomDropdownMenu = (props: CustomDropdownMenuProps) => {
 export type DropdownItemProps = {
   children?: ReactNode
   disabled?: boolean
-  onSelect?: (e: Event) => void
+  onSelect?: (event: Event) => void
   className?: string
   style?: CSSProperties
 }
 
-export const DropdownItem = (props: DropdownItemProps) => {
-  const { children, disabled, onSelect, className, style } = props
+export const DropdownItem: FC<DropdownItemProps> = ({
+  children,
+  disabled,
+  onSelect,
+  className,
+  style,
+}) => {
   const classNames = {
     item: clsx(s.item, className),
   }
@@ -127,8 +128,15 @@ export type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
   text: string
 } & ComponentPropsWithoutRef<'div'>
 
-export const DropdownItemWithIcon = (props: DropdownItemWithIconProps) => {
-  const { icon, text, disabled, onSelect, className, style, ...rest } = props
+export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({
+  icon,
+  disabled,
+  onSelect,
+  text,
+  className,
+  style,
+  ...rest
+}) => {
   const classNames = {
     item: clsx(s.item, className),
     itemIcon: s.itemIcon,
@@ -146,7 +154,7 @@ export const DropdownItemWithIcon = (props: DropdownItemWithIconProps) => {
     >
       <motion.div {...item}>
         <div className={classNames.itemIcon}>{icon}</div>
-        <Typography variant={'caption'}>{text}</Typography>
+        <Typography variant="caption">{text}</Typography>
       </motion.div>
     </DropdownMenuRadix.Item>
   )

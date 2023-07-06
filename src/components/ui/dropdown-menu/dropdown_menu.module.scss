@@ -19,7 +19,7 @@
   position: relative;
 
   min-width: 134px;
-  padding: 10px 0;
+  padding: 12px;
 
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
@@ -29,7 +29,6 @@
 .itemsBox {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .arrowBox {
@@ -57,16 +56,14 @@
   cursor: pointer;
 
   display: flex;
-  gap: 12px;
+  gap: 6px;
   align-items: center;
 
-  height: 36px;
-  padding: 0 12px;
+  padding: 12px 0;
 
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
 
-  background-color: var(--color-dark-700);
   outline: none;
 
   &:last-of-type {
@@ -101,6 +98,3 @@
   width: 24px;
   height: 24px;
 }
-
-
-

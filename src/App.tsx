@@ -6,20 +6,23 @@ import { Header } from './components/ui/header'
 import { TextField } from './components/ui/text-field'
 import { Eye } from './images/svg/icons/EyeSvg.tsx'
 import { Search } from './images/svg/icons/SearchSvg.tsx'
-import s from './components/ui/header/header.module.scss'
-import { CustomDropdownMenu, DropdownItemWithIcon } from './components/ui/account-menu'
-import { ProfileIcon } from './images/svg/icons/ProfileSvg.tsx'
-import { More } from './images/svg/icons/MoreSvg.tsx'
-import { Logout } from './images/svg/icons'
+import { CustomDropdownMenu, DropdownItemWithIcon } from './components/ui/dropdown-menu'
+import { More } from './images/svg/icons/MoreSvg'
 
 export function App() {
+  const userInfo = {
+    name: 'Alexey',
+    avatar: '',
+    email: 'Gaba00275@yandex.ru',
+  }
+
   return (
     <div>
       <Button as={Link} to={'/home'}>
         Go home
       </Button>
       <CustomCheckbox />
-      <Header />
+      <Header isAuth={true} userInfo={userInfo} />
       <TextField variant={'password'} placeholder={'please type password'}>
         <Eye />
       </TextField>
@@ -30,14 +33,17 @@ export function App() {
 
       <CustomDropdownMenu
         trigger={
-          <button className={s.IconButton} aria-label="Customise options">
+          <button
+            style={{ background: 'transparent', border: 'none' }}
+            aria-label="Customise options"
+          >
             <More />
           </button>
         }
       >
-        <DropdownItemWithIcon icon={<ProfileIcon />} text="My Profile" />
-        <DropdownItemWithIcon icon={''} text="Pack" />
-        <DropdownItemWithIcon icon={<Logout />} text="Logout" />
+        <DropdownItemWithIcon icon={''} text="add" />
+        <DropdownItemWithIcon icon={''} text="edit" />
+        <DropdownItemWithIcon icon={''} text="delete" />
       </CustomDropdownMenu>
     </div>
   )

@@ -1,24 +1,10 @@
 import * as Avatar from '@radix-ui/react-avatar'
-import * as Label from '@radix-ui/react-label'
 
 import s from './avatar.module.scss'
 
-export type UserAvatarProps = {
-  name?: string
-}
-
-export const UserAvatar = (props: UserAvatarProps) => {
-  const { name } = props
-
+export const UserAvatar = () => {
   return (
     <div className={s.wrapper}>
-      {name && (
-        <div className={s.label_wrapper}>
-          <Label.Root className={s.LabelRoot} htmlFor="firstName">
-            {name}
-          </Label.Root>
-        </div>
-      )}
       <Avatar.Root className={s.AvatarRoot}>
         <Avatar.Image
           className={s.AvatarImage}
