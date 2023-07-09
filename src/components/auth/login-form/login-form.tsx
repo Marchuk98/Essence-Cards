@@ -1,51 +1,63 @@
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '../../ui/button'
+import { Button, Typography } from '../../ui'
 import { ControlledTextField } from '../../controlled'
-import { ControlledCheckbox } from '../../controlled/controlled-checkbox'
-import { Card } from '../../ui/card'
+import { ControlledCheckbox } from '../../controlled'
+import { Card } from '../../ui'
+import { LoginFormInputs, useLoginForm } from '../../../common/schemas'
 
-const schema = z.object({
-  login: z.string().trim().nonempty('Enter login').min(3, 'Login must be at least 3 character'),
-  password: z
-    .string()
-    .trim()
-    .nonempty('Enter login')
-    .min(8, 'Password must be at least 8 character'),
-  rememberMe: z.literal<boolean>(true, {
-    errorMap: () => {
-      return { message: 'You must agree to the terms and condition' }
-    },
-  }),
-  email: z.string().trim().email('Invalid email address').nonempty('Enter email'),
-})
+import s from './login-form.module.scss'
 
-type LoginFormProps = z.infer<typeof schema>
+type LoginFormProps = {
+  onSubmit: (data: LoginFormInputs) => void
+}
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<LoginFormProps>({
-    resolver: zodResolver(schema),
-    mode: 'onSubmit',
-  })
+  } = useLoginForm(onSubmit)
 
   console.log(errors)
 
-  const onSubmit = handleSubmit(data => console.log(data))
-
   return (
-    <Card>
-      <form onSubmit={onSubmit}>
-        <ControlledTextField label={'login'} name={'login'} control={control} />
-        <ControlledTextField label={'email'} name={'email'} control={control} />
-        <ControlledTextField label={'password'} name={'password'} control={control} />
-        <ControlledCheckbox label={'Remember me'} name={'rememberMe'} control={control} />
-        <Button type={'submit'} fullWidth={true}>Submit</Button>
+    <Card className={s.card}>
+      <Typography variant={'large'} as={'h1'}>
+        Sign In
+      </Typography>
+
+      <form onSubmit={handleSubmit}>
+        <ControlledTextField
+          label={'Email'}
+          name={'email'}
+          control={control}
+          className={s.text_field}
+        />
+        <ControlledTextField
+          label={'Password'}
+          name={'password'}
+          control={control}
+          className={s.text_field}
+          variant={'password'}
+        />
+        <ControlledCheckbox
+          label={'Remember me'}
+          name={'rememberMe'}
+          control={control}
+          className={s.checkbox}
+        />
+        <Typography variant="body_2" as={'a'} className={s.forgotPassword}>
+          Forgot password?
+        </Typography>
+        <Button type={'submit'} fullWidth>
+          Submit
+        </Button>
       </form>
+      <Typography variant="body_2" className={s.noAccount}>
+        {`Don't have an account?`}
+      </Typography>
+      <Typography as={'a'} href={'/sing-up'} className={s.signUpLink}>
+        Sign Up
+      </Typography>
     </Card>
   )
 }
