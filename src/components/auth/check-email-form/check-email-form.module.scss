@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  align-items: center;
+  max-width: 420px;
+  padding: 33px 36px 29px;
+
+  > h1 {
+    margin-bottom: 27px;
+    text-align: center;
+  }
+}
+
+.icon {
+  margin-bottom: 15px;
+}
+
+.description {
+  line-height: var(--line-height-m);
+  text-align: center;
+}
+
+.link {
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
