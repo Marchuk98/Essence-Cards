@@ -7,20 +7,14 @@ import { Button, Card, Typography } from '../../ui'
 import s from './forgot-password-form.module.scss'
 
 export type ForgotPasswordFormProps = {
-  linkPath: string
+  linkPath?: string
   onSubmit: (data: ForgotPasswordInput) => void
 }
 
 export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
   const { onSubmit, linkPath } = props
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = UseForgotPasswordForm(onSubmit)
-
-  console.log(errors)
+  const { handleSubmit, control } = UseForgotPasswordForm(onSubmit)
 
   return (
     <Card className={s.card}>
@@ -44,9 +38,9 @@ export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
       <Typography variant="body_2" color={'form'} className={s.question}>
         {`Did you remember your password?`}
       </Typography>
-      <Button as={'a'} variant={'link'} className={s.link} href={linkPath}>
+      <Typography as={'a'} href={linkPath} className={s.signInLink}>
         Try logging in
-      </Button>
+      </Typography>
     </Card>
   )
 }

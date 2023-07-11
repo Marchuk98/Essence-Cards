@@ -54,9 +54,9 @@ export const RegisterForm = (props: RegisterFormProps) => {
       <Typography variant="body_2" color={'form'} className={s.accountCreated}>
         {`Already have an account?`}
       </Typography>
-      <Button as={'a'} variant={'link'} className={s.link} href={linkPath}>
+      <Typography as={'a'} href={linkPath} className={s.signInLink}>
         Sign In
-      </Button>
+      </Typography>
     </Card>
   )
 }

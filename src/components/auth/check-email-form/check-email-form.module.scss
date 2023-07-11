@@ -15,11 +15,19 @@
 }
 
 .description {
+  margin-bottom: 65px;
   line-height: var(--line-height-m);
   text-align: center;
 }
 
-.link {
-  color: var(--color-accent-500);
-  text-decoration: underline;
+.signInLink {
+  width: 348px;
+  margin-bottom: 18px;
+  padding: 6px 28px;
+
+  text-align: center;
+  text-decoration: none;
+
+  background: var(--primary-500, #8C61FF);
+  border-radius: 4px;
 }

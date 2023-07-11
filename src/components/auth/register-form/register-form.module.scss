@@ -16,11 +16,17 @@
 }
 
 .accountCreated {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
 }
 
-.link {
+.signInLink {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 7px;
+
+  font-weight: var(--font-weight-bold);
   color: var(--color-accent-500);
-  text-decoration: underline;
+  text-decoration-line: underline;
 }
