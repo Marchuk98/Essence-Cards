@@ -4,7 +4,8 @@ import s from './typography.module.scss'
 
 export type TypographyPropsType<T extends ElementType = 'p'> = {
   as?: T
-  variant:
+  color?: 'primary' | 'secondary' | 'inherit' | 'link' | 'error' | 'tertiary' | 'form'
+  variant?:
     | 'large'
     | 'h1'
     | 'h2'
@@ -24,10 +25,17 @@ export type TypographyPropsType<T extends ElementType = 'p'> = {
 export const Typography = <T extends ElementType = 'p'>(
   props: TypographyPropsType<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyPropsType<T>>
 ) => {
-  const { children, variant, className, as: Component = 'p', ...rest } = props
+  const {
+    children,
+    color = 'primary',
+    variant = 'body_1',
+    className,
+    as: Component = 'p',
+    ...rest
+  } = props
 
   return (
-    <Component className={`${s[variant]} ${className ?? ''}`} {...rest}>
+    <Component className={`${variant && s[variant]} ${s[color]}  ${className ?? ''}`} {...rest}>
       {children}
     </Component>
   )

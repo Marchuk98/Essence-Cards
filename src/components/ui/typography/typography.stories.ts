@@ -25,6 +25,9 @@ const meta = {
       ],
       control: { type: 'radio' },
     },
+    children: {
+      control: { type: 'text' },
+    },
   },
 } satisfies Meta<typeof Typography>
 
@@ -124,5 +127,6 @@ export const Error: Story = {
   args: {
     variant: 'error',
     children: 'This is an error message',
+    color: 'error',
   },
 }
