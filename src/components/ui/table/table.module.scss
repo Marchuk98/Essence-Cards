@@ -1,0 +1,62 @@
+.table {
+  border-collapse: collapse;
+
+  color: var(--light-100, #fff);
+
+  border-top: 0.06rem solid var(--color-dark-500);
+  border-right: 0.06rem solid var(--color-dark-500);
+  border-left: 0.06rem solid var(--color-dark-500);
+}
+
+.headCell {
+  cursor: pointer;
+  user-select: none;
+
+  gap: 0.625rem;
+
+  padding: 0.375rem 1.5rem;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-m);
+
+  background: var(--color-dark-500);
+
+  &.noSort {
+    cursor: initial;
+  }
+}
+
+.tableCell {
+  padding: 0.38rem 1.5rem;
+
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  vertical-align: middle;
+
+  background: var(--color-dark-900);
+  border-bottom: 0.06rem solid var(--color-dark-500);
+}
+
+.title {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sortAscIcon {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sortDscIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1rem;
+
+  transition: transform 0.3s ease-in-out;
+}
+
