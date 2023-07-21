@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { memo, SVGProps } from 'react'
 
-export const More = (props: SVGProps<SVGSVGElement>) => (
+export const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" {...props}>
     <circle cx={12} cy={12} r={8.5} stroke="#fff" />
     <g fill="#fff" clipPath="url(#a)">
@@ -13,3 +13,7 @@ export const More = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 )
+
+const More = memo(SvgComponent)
+
+export { More }

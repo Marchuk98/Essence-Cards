@@ -1,11 +1,12 @@
-import { CSSProperties, ReactNode, useState, FC, ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, CSSProperties, FC, ReactNode, useState } from 'react'
 
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 import { AnimatePresence, motion, MotionProps, Variants } from 'framer-motion'
+import { Typography } from '../typography'
+import { More } from '../../../images/svg/icons'
 
 import s from './dropdown_menu.module.scss'
-import { Typography } from '../typography'
 
 export type DropdownProps = {
   children: ReactNode
@@ -59,7 +60,13 @@ export const CustomDropdownMenu = ({
 
   return (
     <DropdownMenuRadix.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenuRadix.Trigger asChild>{trigger}</DropdownMenuRadix.Trigger>
+      <DropdownMenuRadix.Trigger asChild>
+        {trigger ?? (
+          <button className={classNames.button}>
+            <More />
+          </button>
+        )}
+      </DropdownMenuRadix.Trigger>
       <AnimatePresence>
         {open && (
           <DropdownMenuRadix.Portal forceMount>
@@ -139,7 +146,7 @@ export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({
 }) => {
   const classNames = {
     item: clsx(s.item, className),
-    itemIcon: s.itemIcon,
+    itemIcon: clsx(s.itemIcon, disabled && s.disabled),
   }
 
   return (
@@ -152,10 +159,10 @@ export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({
       asChild
       {...rest}
     >
-      <motion.div {...item}>
+      <div>
         <div className={classNames.itemIcon}>{icon}</div>
         <Typography variant="caption">{text}</Typography>
-      </motion.div>
+      </div>
     </DropdownMenuRadix.Item>
   )
 }
