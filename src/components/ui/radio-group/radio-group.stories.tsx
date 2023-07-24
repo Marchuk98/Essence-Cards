@@ -15,7 +15,7 @@ export const Default: Story = {
   render: args => {
     const [value, setValue] = useState('1')
 
-    return <RadioGroup {...args} value={value} onChange={setValue} />
+    return <RadioGroup {...args} value={value} onValueChange={setValue} />
   },
 
   args: {
@@ -31,7 +31,7 @@ export const DisabledRadioButton: Story = {
   render: args => {
     const [value, setValue] = useState('1')
 
-    return <RadioGroup {...args} value={value} onChange={setValue} />
+    return <RadioGroup {...args} value={value} onValueChange={setValue} />
   },
   args: {
     options: [
