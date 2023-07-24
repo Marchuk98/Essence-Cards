@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { memo, SVGProps } from 'react'
 
-export const Search = (props: SVGProps<SVGSVGElement>) => (
+const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" {...props}>
     <g clipPath="url(#a)">
       <path
@@ -15,3 +15,7 @@ export const Search = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 )
+
+const Search = memo(SvgComponent)
+
+export { Search }

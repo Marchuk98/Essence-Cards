@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { memo, SVGProps } from 'react'
 
-export const EyeOff = (props: SVGProps<SVGSVGElement>) => (
+const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     style={{
       color: 'white',
@@ -27,3 +27,7 @@ export const EyeOff = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 )
+
+const EyeOff = memo(SvgComponent)
+
+export { EyeOff }

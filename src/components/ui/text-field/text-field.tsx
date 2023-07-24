@@ -1,82 +1,108 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode, useState } from 'react'
+import { ComponentProps, KeyboardEvent, ReactNode, useState } from 'react'
 
 import clsx from 'clsx'
 
-import { EyeOff } from '../../../images/svg/icons/EyeOffSvg.tsx'
-import { Eye } from '../../../images/svg/icons/EyeSvg.tsx'
+import { Close, Eye, EyeOff, Search } from '../../../images/svg/icons'
 import { Typography } from '../typography'
 
 import s from './text-field.module.scss'
 
-export type InputPropsType<T extends ElementType = 'input'> = {
-  as?: T
-  variant?: 'default' | 'password' | 'search'
-  className?: string
-  children?: ReactNode
-  errorMessage?: string
+export type TextFieldProps = {
+  value?: string
   label?: string
-} & ComponentPropsWithoutRef<'input'>
+  errorMessage?: string
+  iconStart?: ReactNode
+  iconEnd?: ReactNode
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
+  onClearValue?: () => void
+  className?: string
+} & ComponentProps<'input'>
 
-export const TextField = <T extends ElementType = 'input'>(
-  props: InputPropsType<T> & Omit<ComponentPropsWithoutRef<T>, keyof InputPropsType<T>>
-) => {
-  const {
-    variant = 'default',
-    as: Component = 'input',
-    className,
-    children,
-    errorMessage,
+export const TextField = (props: TextFieldProps) => {
+  let {
+    disabled,
+    value,
+    type,
     label,
+    errorMessage,
+    iconStart,
+    iconEnd,
+    onEnter,
+    onKeyDown,
+    onClearValue,
+    className,
     ...rest
   } = props
+
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const showError = errorMessage && errorMessage.length > 0
 
-  const styles = {
-    wrapper: clsx(s.wrapper, { [s.error]: errorMessage }),
-    labelField: s.label_field,
-    field: clsx(s.field, !!errorMessage && s.error, className),
-    icon: s.icon,
-    input: clsx(s[variant], { [s.error]: errorMessage }),
-    error: clsx(s.error),
+  if (type === 'search') {
+    iconStart = <Search />
+  }
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (onEnter && e.key === 'Enter') {
+      onEnter(e)
+    }
+    onKeyDown?.(e)
   }
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(prevState => !prevState)
+  const classNames = {
+    root: clsx(s.root, className),
+    field: clsx(s.field, showError && s.error),
+    iconButton: clsx(s.iconButton, disabled && s.disabled),
+    iconStart: clsx(s.iconStart),
+    label: clsx(s.label),
   }
 
-  let type = 'text'
-
-  if (variant === 'password') {
-    type = showPassword ? 'text' : 'password'
-  } else if (variant === 'search') {
-    type = 'search'
+  const showClearValueIcon = !iconEnd && !showError && onClearValue && value?.length! > 0
+  const dataIconStart = iconStart ? 'start' : ''
+  const dataIconEnd = iconEnd || showClearValueIcon ? 'end' : ''
+  const dataIcon = dataIconStart + dataIconEnd
+  const onClickShowValue = () => {
+    if (!disabled) {
+      setShowPassword(!showPassword)
+    }
   }
 
   return (
-    <>
+    <div className={classNames.root}>
       {label && (
-        <Typography variant={'body_2'} as={'label'}>
+        <Typography variant={'body_2'} as={'label'} className={classNames.label}>
           {label}
         </Typography>
       )}
-      <div className={styles.wrapper} tabIndex={0}>
-        <div className={styles.field}>
-          {variant === 'password' && (
-            <div className={styles.icon} onClick={togglePasswordVisibility}>
-              {showPassword ? <EyeOff /> : <Eye />}
-            </div>
-          )}
+      <div className={s.fieldContainer}>
+        {iconStart && <span className={s.iconStart}>{iconStart}</span>}
+        <input
+          value={value}
+          disabled={disabled}
+          data-icon={dataIcon}
+          className={classNames.field}
+          type={showPassword ? 'text' : type}
+          onKeyDown={handleKeyDown}
+          {...rest}
+        />
 
-          {variant === 'search' && <div className={styles.icon}>{children}</div>}
+        {type === 'password' && (
+          <button className={classNames.iconButton} type="button" onClick={onClickShowValue}>
+            {!showPassword ? <Eye /> : <EyeOff />}
+          </button>
+        )}
 
-          <div style={{ width: '100%' }}>
-            <Component className={styles.input} {...rest} type={type} />
-          </div>
-        </div>
+        {showClearValueIcon && (
+          <button className={classNames.iconButton} onClick={onClearValue} type="button">
+            {<Close />}
+          </button>
+        )}
+
+        {iconEnd && <span className={s.iconEnd}>{iconEnd}</span>}
       </div>
-      <Typography variant={'error'} className={styles.error}>
-        {errorMessage}
-      </Typography>
-    </>
+      {showError && (
+        <Typography variant={'error'} color={'error'}>
+          {errorMessage}
+        </Typography>
+      )}
+    </div>
   )
 }
