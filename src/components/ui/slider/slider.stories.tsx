@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
-import { Slider } from './slider.tsx'
+import { Slider } from './'
 
 const meta = {
   title: 'Components/Slider',
@@ -16,22 +16,28 @@ const meta = {
 } satisfies Meta<typeof Slider>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const DefaultSlider: Story = {
-  render: args => {
-    const [value, setValue] = useState([30, 60])
+export const Default = () => {
+  const [values, setValues] = useState<[number, number]>([0, 100])
 
-    const changeHandler = (value: number[]) => setValue(value)
+  const args = {
+    value: values,
+    minValue: values[0],
+    maxValue: values[1],
+  }
 
-    return (
-      <Slider
-        value={value}
-        defaultValue={[10, 20]}
-        isRange
-        onValueChange={changeHandler}
-        {...args}
-      />
-    )
-  },
+  return <Slider {...args} onValueChange={setValues} value={values} />
+}
+
+export const Slider_Control_With_Label = () => {
+  const [values, setValues] = useState<[number, number]>([0, 100])
+
+  const args = {
+    value: values,
+    minValue: values[0],
+    maxValue: values[1],
+    label: 'Slider control number',
+  }
+
+  return <Slider {...args} onValueChange={setValues} value={values} />
 }
