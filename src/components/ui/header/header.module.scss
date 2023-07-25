@@ -6,10 +6,10 @@
 
   background: var(--color-dark-700, #171717);
   border-bottom: 1px solid var(--color-dark-500, #333);
-}
 
-.logoLink {
-  display: flex;
+  .logoLink {
+    display: flex;
+  }
 }
 
 .userMenuTrigger {
@@ -20,11 +20,10 @@
   display: flex;
   gap: 14px;
   align-items: center;
-}
 
-.userName {
-  margin: 5px 15px 5px 0;
-  border-bottom: 2px dashed;
+  .userName {
+    border-bottom: 2px dashed;
+  }
 }
 
 .userEmail {
@@ -40,18 +39,5 @@
   display: flex;
   gap: 8px;
   align-items: center;
-}
-
-
-.header > :nth-child(1) {
-  order: 1;
-}
-
-.header > :nth-child(2) {
-  order: 2;
-  margin-left: auto;
-}
-
-.header > :nth-child(3) {
-  order: 3;
+  justify-content: flex-end;
 }
