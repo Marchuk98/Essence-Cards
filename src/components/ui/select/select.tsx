@@ -16,7 +16,7 @@ export type SelectProps = {
   className?: string
   width?: CSSProperties['width']
   disabled?: boolean
-  value?: string
+  value?: string | number
   errorMessage?: string
   fullWidth?: boolean
 }
@@ -48,7 +48,7 @@ export const Select = (props: SelectProps) => {
     <div className={classNames.root} style={{ width: width }}>
       <Label className={classNames.label}>
         {label && <Typography variant={'body_2'}>{label}</Typography>}
-        <SelectCSE.Root value={value} disabled={disabled} onValueChange={onChange}>
+        <SelectCSE.Root value={value?.toString()} disabled={disabled} onValueChange={onChange}>
           <SelectCSE.Trigger className={classNames.trigger} style={{ width: width }}>
             <SelectCSE.Value placeholder={placeholder}>{value}</SelectCSE.Value>
             <SelectCSE.Icon
