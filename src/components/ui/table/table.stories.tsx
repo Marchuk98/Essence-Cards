@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Sort, Table } from './'
-import { CustomCheckbox } from '../checkbox'
+import { Checkbox } from '../checkbox'
 import { Grades } from '../grades'
 
 const data = [
@@ -126,7 +126,7 @@ export const Data_Cell: Story = {
 
 export const Data_Cell_With_CheckBox_Name: Story = {
   args: {
-    children: <Table.TableCell>{<CustomCheckbox label={'Name'} />}</Table.TableCell>,
+    children: <Table.TableCell>{<Checkbox label={'Name'} />}</Table.TableCell>,
   },
 }
 
@@ -145,8 +145,3 @@ export const Data_Cell_With_Grade: Story = {
   },
 }
 
-export const Data_Cell_With_Checkbox: Story = {
-  args: {
-    children: <Table.TableCell>{<CustomCheckbox />}</Table.TableCell>,
-  },
-}
