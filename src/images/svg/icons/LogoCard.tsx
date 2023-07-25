@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { memo, SVGProps } from 'react'
 
-export const LogoCardProject = (props: SVGProps<SVGSVGElement>) => (
+const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={104} height={29} fill="none" {...props}>
     <path stroke="#F6E868" strokeWidth={2} d="M25.07 1H1v24.923h24.07V1Z" />
     <path stroke="#F6E868" strokeWidth={2} d="M19.586 6.538H6.484v13.847h13.102V6.538Z" />
@@ -24,3 +24,7 @@ export const LogoCardProject = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 )
+
+const LogoCardProject = memo(SvgComponent)
+
+export { LogoCardProject }
