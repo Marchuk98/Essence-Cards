@@ -37,20 +37,20 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           control={control}
           className={s.checkbox}
         />
-        <Typography variant="body_2" as={'p'} className={s.forgotPassword}>
+        <Typography variant="body_2" as={'a'} className={s.forgotPassword} href={''}>
           Forgot password?
         </Typography>
 
         <Button type={'submit'} fullWidth>
           Sign In
         </Button>
+        <Typography variant="body_2" className={s.noAccount}>
+          {`Don't have an account?`}
+        </Typography>
+        <Typography variant={'link_1'} as={'p'} className={s.signUpLink}>
+          Sign Up
+        </Typography>
       </form>
-      <Typography variant="body_2" className={s.noAccount}>
-        {`Don't have an account?`}
-      </Typography>
-      <Typography variant={'link_1'} as={'p'} className={s.signUpLink}>
-        Sign Up
-      </Typography>
     </Card>
   )
 }

@@ -19,7 +19,7 @@ export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
   return (
     <Card className={s.card}>
       <Typography variant={'large'} as={'h1'}>
-        Forgot Password
+        Forgot your password?
       </Typography>
       <form onSubmit={handleSubmit}>
         <ControlledTextField
@@ -38,7 +38,7 @@ export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
       <Typography variant="body_2" color={'form'} className={s.question}>
         {`Did you remember your password?`}
       </Typography>
-      <Typography as={'a'} href={linkPath} className={s.signInLink}>
+      <Typography variant={'link_1'} as={'a'} href={linkPath} className={s.signInLink}>
         Try logging in
       </Typography>
     </Card>

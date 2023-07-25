@@ -1,7 +1,8 @@
-import { Card, Typography } from '../../ui'
+import { Button, Card, Typography } from '../../ui'
+
+import { MailIcon } from '../../../images/svg/icons'
 
 import s from './check-email-form.module.scss'
-import MailIcon from '../../../images/svg/icons/mail-icon.tsx'
 
 export type CheckEmailFormProps = {
   email: string
@@ -20,9 +21,10 @@ export const CheckEmailForm = (props: CheckEmailFormProps) => {
       <Typography variant="body_2" color={'form'} className={s.description}>
         We’ve sent an Email with instructions to {email ? email : 'example@mail.com'}
       </Typography>
-      <Typography as={'a'} href={linkPath} className={s.signInLink}>
+
+      <Button as={'a'} fullWidth variant={'primary'} className={s.button} href={linkPath}>
         Back to Sign In
-      </Typography>
+      </Button>
     </Card>
   )
 }

@@ -1,12 +1,12 @@
-import { Button, Card, Typography, UserAvatar } from '../../ui'
+import { Button, Card, Typography, UserAvatar, FileInput } from '../../ui'
 
-import s from './personal-information.module.scss'
 import { UseProfileForm } from '../../../common/schemas'
 import { useState } from 'react'
-import { FileInput } from '../../ui/file-input'
-import EditIcon from '../../../images/svg/icons/edit-icon.tsx'
-import { Logout } from '../../../images/svg/icons'
+
+import { Edit, Logout } from '../../../images/svg/icons'
 import { ControlledTextField } from '../../controlled'
+
+import s from './personal-information.module.scss'
 
 type PersonalInformationProps = {
   name: string
@@ -35,18 +35,14 @@ export const PersonalInformation = (props: PersonalInformationProps) => {
 
   return (
     <Card className={s.card}>
-      <Typography variant={'large'} as={'h1'}>
-        Personal Information
-      </Typography>
+      <Typography variant={'large'}>Personal Information</Typography>
       <UserAvatar
         className={s.avatar}
         name={name}
         src={avatar}
         width={96}
         height={96}
-        avatarContent={
-          !editMode && <FileInput onChange={changeAvatarHandler} trigger={<EditIcon />} />
-        }
+        avatarContent={!editMode && <FileInput onChange={changeAvatarHandler} trigger={<Edit />} />}
       />
       {editMode ? (
         <form onSubmit={onSubmit}>
@@ -64,7 +60,7 @@ export const PersonalInformation = (props: PersonalInformationProps) => {
         <>
           <div className={s.name}>
             <Typography variant={'h1'}>{name}</Typography>
-            <EditIcon onClick={editModeOnHandler} className={s.editIcon} />
+            <Edit onClick={editModeOnHandler} className={s.editIcon} />
           </div>
           <Typography variant={'body_2'} className={s.email}>
             {email}

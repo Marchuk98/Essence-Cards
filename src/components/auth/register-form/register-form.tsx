@@ -50,13 +50,13 @@ export const RegisterForm = (props: RegisterFormProps) => {
         <Button type={'submit'} fullWidth className={s.registerAccountButton}>
           Submit
         </Button>
+        <Typography variant="body_2" color={'form'} className={s.accountCreated}>
+          {`Already have an account?`}
+        </Typography>
+        <Typography variant={'link_1'} as={'a'} href={linkPath} className={s.signInLink}>
+          Sign In
+        </Typography>
       </form>
-      <Typography variant="body_2" color={'form'} className={s.accountCreated}>
-        {`Already have an account?`}
-      </Typography>
-      <Typography as={'a'} href={linkPath} className={s.signInLink}>
-        Sign In
-      </Typography>
     </Card>
   )
 }

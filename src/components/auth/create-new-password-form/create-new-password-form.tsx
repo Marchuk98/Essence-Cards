@@ -1,9 +1,7 @@
-import {
-  CreateNewPasswordInput,
-  UseCreateNewPassword,
-} from '../../../common/schemas/use-create-new-password-form.ts'
+import { CreateNewPasswordInput, UseCreateNewPassword } from '../../../common/schemas'
 import { Button, Card, Typography } from '../../ui'
 import { ControlledTextField } from '../../controlled'
+
 import s from './create-new-password-form.module.scss'
 
 export type CreateNewPasswordFormProps = {
@@ -34,7 +32,7 @@ export const CreateNewPasswordForm = (props: CreateNewPasswordFormProps) => {
             Create new password and we will send you further instructions to email
           </Typography>
         </div>
-        <Button fullWidth type={'submit'} className={s.newPasswordButton}>
+        <Button fullWidth type={'submit'}>
           Create new password
         </Button>
       </form>
