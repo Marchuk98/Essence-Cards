@@ -2,17 +2,18 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
-import { App } from './App.tsx'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import './styles/index.scss'
+import { store } from './app/store.ts'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './common'
+import { Toast } from './components/ui/toast-container'
 
-createRoot(document.getElementById('root') as HTMLElement).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path={'/'} element={<App />} />
-        <Route path={'/home'} element={<div>Home</div>} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toast />
+    </Provider>
   </StrictMode>
 )
