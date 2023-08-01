@@ -1,28 +1,82 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ResponseUserType } from './auth.types.ts'
+import { commonApi } from '../../common/base-query-with-reauth.ts'
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_API_URL,
-    credentials: 'include',
-  }),
+import {
+  RequestLoginType,
+  RequestRecoveryPasswordType,
+  RequestRegisterType,
+  RequestResetPasswordType,
+  ResponseLoginType,
+  ResponseRegisterType,
+  ResponseUserType,
+} from './auth.types.ts'
+
+export const authApi = commonApi.injectEndpoints({
   endpoints: builder => ({
-    me: builder.query<ResponseUserType, void>({
-      query: () => ({
-        url: 'auth/me',
-      }),
+    getMe: builder.query<ResponseUserType | null, void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: 'auth/me',
+        }
+      },
+      extraOptions: { maxRetries: false },
+      providesTags: ['me'],
     }),
-    login: builder.mutation<any, { email: string; password: string }>({
-      query: ({ email, password }) => ({
-        url: 'auth/login',
-        method: 'POST',
-        body: { email, password },
-      }),
+    login: builder.mutation<ResponseLoginType, RequestLoginType>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: 'auth/login',
+          body,
+        }
+      },
+      invalidatesTags: ['me'],
+    }),
+    registration: builder.mutation<ResponseRegisterType, RequestRegisterType>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: 'auth/sign-up',
+          body,
+        }
+      },
+    }),
+    recoveryPassword: builder.mutation<unknown, RequestRecoveryPasswordType>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: 'auth/recover-password',
+          body,
+        }
+      },
+    }),
+    resetPassword: builder.mutation<unknown, RequestResetPasswordType>({
+      query: ({ token, password }) => {
+        return {
+          method: 'POST',
+          url: `auth/reset-password/${token}`,
+          body: { password },
+        }
+      },
+    }),
+    logout: builder.mutation<unknown, void>({
+      query: () => {
+        return {
+          method: 'POST',
+          url: 'auth/logout',
+        }
+      },
     }),
   }),
 })
 
-export const { useMeQuery, useLoginMutation } = authApi
+export const {
+  useGetMeQuery,
+  useLoginMutation,
+  useRegistrationMutation,
+  useRecoveryPasswordMutation,
+  useResetPasswordMutation,
+  useLogoutMutation,
+} = authApi
 
 
