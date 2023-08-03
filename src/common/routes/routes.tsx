@@ -1,14 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PATH } from '../constants'
 import { Packs } from '../../services/packs/components/packs/packs.tsx'
-import { Login } from '../../services/auth/components/login/login.tsx'
+import { Login } from '../../services'
 import { ProtectedRoutes } from './protected-routes.tsx'
 import { App } from '../../app/App.tsx'
-import { Register } from '../../services/auth/components/register/register.tsx'
-import { PasswordRecovery } from '../../services/auth/components/password-recovery/password-recovery.tsx'
-import { CheckEmail } from '../../services/auth/components/check-email/check-email.tsx'
-import { NewPassword } from '../../services/auth/components/new-password/new-password.tsx'
-import { Profile } from '../../services/profile/components/profile/profile.tsx'
+import { Register } from '../../services'
+import { PasswordRecovery } from '../../services'
+import { CheckEmail } from '../../services'
+import { NewPassword } from '../../services'
+import { Profile } from '../../services'
 
 export const router = createBrowserRouter([
   {

@@ -6,6 +6,7 @@ import { Button } from '../button'
 import { LogoCardProject, Logout, Person } from '../../../images/svg/icons'
 
 import s from './header.module.scss'
+import {Link} from "react-router-dom";
 
 type HeaderProps = {
   isAuth: boolean
@@ -18,15 +19,14 @@ type HeaderProps = {
 }
 
 export const Header = (props: HeaderProps) => {
-  // TODO:  в процессе разработки логики доработка avatar, onProfileSelect, onSignOut
+  // TODO:  в линку сделать редирект на pack-list потом
   const { isAuth, name, email, avatar, onProfileSelect, onSignIn, onSignOut } = props
 
   return (
     <header className={s.header}>
-      <LogoCardProject />
-      {/*<Link to={'/'} className={s.logoLink}>*/}
-      {/*    */}
-      {/*</Link>*/}
+      <Link to={'/'} className={s.logoLink}>
+        <LogoCardProject />
+      </Link>
       {isAuth ? (
         <CustomDropdownMenu
           trigger={
