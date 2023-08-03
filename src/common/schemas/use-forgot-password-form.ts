@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -8,13 +8,12 @@ const schema = z.object({
 
 export type ForgotPasswordInput = z.infer<typeof schema>
 
-export const UseForgotPasswordForm = (onSubmit: SubmitHandler<ForgotPasswordInput>) => {
-  const { handleSubmit, ...rest } = useForm<ForgotPasswordInput>({
+export const UseForgotPasswordForm = () => {
+  return useForm<ForgotPasswordInput>({
     resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+    },
   })
-
-  return {
-    handleSubmit: handleSubmit(onSubmit),
-    ...rest,
-  }
 }

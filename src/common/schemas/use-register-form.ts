@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -9,7 +9,8 @@ const schema = z
       .string()
       .trim()
       .nonempty('Enter login')
-      .min(8, 'Password must be at least 8 character'),
+      .min(3, 'Password must be at least 3 character')
+      .max(30, 'Password must be no more 30 character'),
     confirmPassword: z.string().trim(),
   })
   .refine(data => data.password === data.confirmPassword, {
@@ -19,13 +20,14 @@ const schema = z
 
 export type RegisterFormInputs = z.infer<typeof schema>
 
-export const UseRegisterForm = (onSubmit: SubmitHandler<RegisterFormInputs>) => {
-  const { handleSubmit, ...rest } = useForm<RegisterFormInputs>({
+export const UseRegisterForm = () => {
+  return useForm<RegisterFormInputs>({
     resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   })
-
-  return {
-    handleSubmit: handleSubmit(onSubmit),
-    ...rest,
-  }
 }

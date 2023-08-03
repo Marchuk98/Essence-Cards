@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -10,7 +10,7 @@ const schema = z.object({
     .string()
     .trim()
     .nonempty('Enter password')
-    .min(3, 'Password must be at least 8 character')
+    .min(3, 'Password must be at least 3 character')
     .max(30, 'Password must be no more 30 character'),
   rememberMe: z.literal<boolean>(true, {
     errorMap: () => {
@@ -21,8 +21,8 @@ const schema = z.object({
 
 export type LoginFormInputs = z.infer<typeof schema>
 
-export const useLoginForm = (onSubmit: SubmitHandler<LoginFormInputs>) => {
-  const { handleSubmit, ...rest } = useForm<LoginFormInputs>({
+export const useLoginForm = () => {
+  return useForm<LoginFormInputs>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
@@ -31,9 +31,4 @@ export const useLoginForm = (onSubmit: SubmitHandler<LoginFormInputs>) => {
       rememberMe: false,
     },
   })
-
-  return {
-    handleSubmit: handleSubmit(onSubmit),
-    ...rest,
-  }
 }
