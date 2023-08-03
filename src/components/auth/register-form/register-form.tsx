@@ -1,24 +1,22 @@
-import { RegisterFormInputs, UseRegisterForm } from '../../../common/schemas'
+import { PATH, RegisterFormInputs, UseRegisterForm } from '../../../common'
 import { Button, Card, Typography } from '../../ui'
 import { ControlledTextField } from '../../controlled'
 
 import s from './register-form.module.scss'
 
 export type RegisterFormProps = {
-  linkPath: string
-  onSubmit: (data: RegisterFormInputs) => void
+  onSubmitHandler: (data: Omit<RegisterFormInputs, 'confirmPassword'>) => void
 }
 
 export const RegisterForm = (props: RegisterFormProps) => {
-  const { onSubmit, linkPath } = props
+  const { onSubmitHandler } = props
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = UseRegisterForm(onSubmit)
+  const { handleSubmit, control, reset } = UseRegisterForm()
 
-  console.log(errors)
+  const onSubmit = handleSubmit(data => {
+    onSubmitHandler({ email: data.email, password: data.password })
+    reset()
+  })
 
   return (
     <Card className={s.card}>
@@ -26,12 +24,13 @@ export const RegisterForm = (props: RegisterFormProps) => {
         Sign Up
       </Typography>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <ControlledTextField
           label={'Email'}
           name={'email'}
           control={control}
           className={s.textField}
+          autoComplete="username"
         />
         <ControlledTextField
           label={'Password'}
@@ -39,6 +38,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
           type={'password'}
           control={control}
           className={s.textField}
+          autoComplete="current-password"
         />
         <ControlledTextField
           label={'Confirm password'}
@@ -46,6 +46,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
           type={'password'}
           control={control}
           className={s.textField}
+          autoComplete="confirm-password"
         />
         <Button type={'submit'} fullWidth className={s.registerAccountButton}>
           Submit
@@ -53,7 +54,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
         <Typography variant="body_2" color={'form'} className={s.accountCreated}>
           {`Already have an account?`}
         </Typography>
-        <Typography variant={'link_1'} as={'a'} href={linkPath} className={s.signInLink}>
+        <Typography variant={'link_1'} as={'a'} href={PATH.LOGIN} className={s.signInLink}>
           Sign In
         </Typography>
       </form>

@@ -1,4 +1,4 @@
-import { ForgotPasswordInput, UseForgotPasswordForm } from '../../../common/schemas'
+import { ForgotPasswordInput, UseForgotPasswordForm } from '../../../common'
 
 import { ControlledTextField } from '../../controlled'
 
@@ -6,22 +6,28 @@ import { Button, Card, Typography } from '../../ui'
 
 import s from './forgot-password-form.module.scss'
 
+import { PATH } from '../../../common'
+
 export type ForgotPasswordFormProps = {
-  linkPath?: string
-  onSubmit: (data: ForgotPasswordInput) => void
+  onSubmitHandler: (data: ForgotPasswordInput) => void
 }
 
 export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
-  const { onSubmit, linkPath } = props
+  const { onSubmitHandler } = props
 
-  const { handleSubmit, control } = UseForgotPasswordForm(onSubmit)
+  const { handleSubmit, control, reset } = UseForgotPasswordForm()
+
+  const onSubmit = handleSubmit(data => {
+    onSubmitHandler({ email: data.email })
+    reset()
+  })
 
   return (
     <Card className={s.card}>
       <Typography variant={'large'} as={'h1'}>
         Forgot your password?
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <ControlledTextField
           label={'Email'}
           name={'email'}
@@ -38,7 +44,7 @@ export const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
       <Typography variant="body_2" color={'form'} className={s.question}>
         {`Did you remember your password?`}
       </Typography>
-      <Typography variant={'link_1'} as={'a'} href={linkPath} className={s.signInLink}>
+      <Typography variant={'link_1'} as={'a'} href={PATH.LOGIN} className={s.signInLink}>
         Try logging in
       </Typography>
     </Card>

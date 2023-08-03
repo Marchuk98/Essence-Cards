@@ -1,15 +1,20 @@
 import { Button, Card, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
-import { LoginFormInputs, useLoginForm } from '../../../common/schemas'
+import { LoginFormInputs, useLoginForm } from '../../../common'
 
 import s from './login-form.module.scss'
+import { PATH } from '../../../common'
 
 type LoginFormProps = {
-  onSubmit: (data: LoginFormInputs) => void
+  onSubmitHandler: (data: LoginFormInputs) => void
 }
 
-export const LoginForm = ({ onSubmit }: LoginFormProps) => {
-  const { handleSubmit, control } = useLoginForm(onSubmit)
+export const LoginForm = (props: LoginFormProps) => {
+  const { onSubmitHandler } = props
+
+  const { handleSubmit, control } = useLoginForm()
+
+  const onSubmit = handleSubmit(onSubmitHandler)
 
   return (
     <Card className={s.card}>
@@ -17,12 +22,13 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         Sign In
       </Typography>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <ControlledTextField
           label={'Email'}
           name={'email'}
           control={control}
           className={s.textField}
+          autoComplete="username"
         />
         <ControlledTextField
           label={'Password'}
@@ -30,6 +36,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           type={'password'}
           control={control}
           className={s.textField}
+          autoComplete="current-password"
         />
         <ControlledCheckbox
           label={'Remember me'}
@@ -37,7 +44,12 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           control={control}
           className={s.checkbox}
         />
-        <Typography variant="body_2" as={'a'} className={s.forgotPassword} href={''}>
+        <Typography
+          variant="body_2"
+          as={'a'}
+          className={s.forgotPassword}
+          href={PATH.PASSWORD_RECOVERY}
+        >
           Forgot password?
         </Typography>
 
@@ -47,7 +59,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         <Typography variant="body_2" className={s.noAccount}>
           {`Don't have an account?`}
         </Typography>
-        <Typography variant={'link_1'} as={'p'} className={s.signUpLink}>
+        <Typography variant={'link_1'} as={'a'} href={PATH.REGISTRATION} className={s.signUpLink}>
           Sign Up
         </Typography>
       </form>

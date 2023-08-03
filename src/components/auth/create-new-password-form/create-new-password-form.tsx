@@ -1,31 +1,37 @@
-import { CreateNewPasswordInput, UseCreateNewPassword } from '../../../common/schemas'
-import { Button, Card, Typography } from '../../ui'
 import { ControlledTextField } from '../../controlled'
+
+import { CreateNewPasswordInput, UseCreateNewPassword } from '../../../common'
+import { Button, Card, Typography } from '../../ui'
 
 import s from './create-new-password-form.module.scss'
 
 export type CreateNewPasswordFormProps = {
-  linkPath?: string
-  onSubmit: (data: CreateNewPasswordInput) => void
+  onSubmitHandler: (data: CreateNewPasswordInput) => void
 }
 
 export const CreateNewPasswordForm = (props: CreateNewPasswordFormProps) => {
-  const { onSubmit } = props
+  const { onSubmitHandler } = props
 
-  const { handleSubmit, control } = UseCreateNewPassword(onSubmit)
+  const { handleSubmit, control, reset } = UseCreateNewPassword()
+
+  const onSubmit = handleSubmit(data => {
+    onSubmitHandler({ password: data.password })
+    reset()
+  })
 
   return (
     <Card className={s.card}>
       <Typography variant={'large'} as={'h1'}>
         Create new password
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <ControlledTextField
           label={'Password'}
           name={'password'}
           type={'password'}
           control={control}
           className={s.textField}
+          autoComplete="new-password"
         />
         <div>
           <Typography variant="body_2" color={'form'} className={s.description}>

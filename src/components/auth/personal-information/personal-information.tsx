@@ -1,6 +1,6 @@
 import { Button, Card, Typography, UserAvatar, FileInput } from '../../ui'
 
-import { UseProfileForm } from '../../../common/schemas'
+import { ProfileFormInput, UseProfileForm } from '../../../common'
 import { useState } from 'react'
 
 import { Edit, Logout } from '../../../images/svg/icons'
@@ -8,29 +8,31 @@ import { ControlledTextField } from '../../controlled'
 
 import s from './personal-information.module.scss'
 
+export type UpdateProfileType = ProfileFormInput & { avatar?: File }
+
 type PersonalInformationProps = {
   name: string
   email: string
   avatar: string
-  onChangeAvatar: (newAvatar: string) => void
-  // onChangeName: (data: ProfileFormInput) => void
-  onLogout?: () => void
+  onChangeProfile: (profile: UpdateProfileType) => void
+  onLogout: () => void
 }
 
 export const PersonalInformation = (props: PersonalInformationProps) => {
-  const { name, email, avatar, onChangeAvatar, onLogout } = props
+  const { name, email, avatar, onChangeProfile, onLogout } = props
 
   const { handleSubmit, control } = UseProfileForm()
 
   const [editMode, setEditMode] = useState(false)
   const editModeOnHandler = () => setEditMode(true)
 
-  const changeAvatarHandler = (avatar: File) => onChangeAvatar(avatar.name)
+  const changeAvatarHandler = (avatar: File) => {
+    onChangeProfile({ avatar })
+  }
 
   const onSubmit = handleSubmit(data => {
-    // onChangeName(data.nickName)
+    onChangeProfile({ name: data.name })
     setEditMode(false)
-    console.log(data)
   })
 
   return (
@@ -48,7 +50,7 @@ export const PersonalInformation = (props: PersonalInformationProps) => {
         <form onSubmit={onSubmit}>
           <ControlledTextField
             control={control}
-            name={'nickName'}
+            name={'name'}
             label={'Nickname'}
             className={s.textField}
           />
