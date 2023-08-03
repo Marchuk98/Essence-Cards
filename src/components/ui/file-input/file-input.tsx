@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactNode, useRef } from 'react'
+
 import { clsx } from 'clsx'
 
 import s from './file-input.module.scss'
@@ -10,19 +11,22 @@ type FileInputPropsType = {
 }
 
 export const FileInput = (props: FileInputPropsType) => {
-  const { onChange, disabled = false, trigger } = props
+  const { disabled = false, trigger, onChange } = props
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleUploadClick = () => inputRef.current?.click()
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
-    onChange(e.target.files[0])
-  }
-
   const classNames = {
     trigger: clsx(s.trigger),
     input: clsx(s.input),
+  }
+
+  const uploadImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      onChange(file)
+    }
   }
 
   return (
@@ -30,7 +34,13 @@ export const FileInput = (props: FileInputPropsType) => {
       <button onClick={handleUploadClick} disabled={disabled} className={classNames.trigger}>
         {trigger}
       </button>
-      <input type="file" ref={inputRef} onChange={handleFileChange} className={classNames.input} />
+      <input
+        type="file"
+        accept="image/png, image/jpeg"
+        ref={inputRef}
+        onChange={uploadImageHandler}
+        className={classNames.input}
+      />
     </div>
   )
 }
