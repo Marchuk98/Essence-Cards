@@ -5,6 +5,12 @@
   justify-content: $justify;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.313rem;
+  align-items: flex-start;
+
 .root {
   display: flex;
 
@@ -93,4 +99,5 @@
       }
     }
   }
+}
 }

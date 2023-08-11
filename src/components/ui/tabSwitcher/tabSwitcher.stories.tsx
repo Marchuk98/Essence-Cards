@@ -20,6 +20,5 @@ export const TabSwitcherDefault: Story = {
       { value: 'tab3', title: 'Switcher', disabled: false },
     ],
     defaultValue: 'tab1',
-    ariaLabel: 'TabSwitcher Aria Label',
   },
 }

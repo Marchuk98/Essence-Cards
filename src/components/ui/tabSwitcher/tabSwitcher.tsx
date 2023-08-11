@@ -8,27 +8,29 @@ import s from './tabSwitcher.module.scss'
 type TabsType = {
   value: string
   title: string
-  disabled: boolean
+  disabled?: boolean
 }
 
 type TabSwitcherProps = {
   tabs: TabsType[]
   label: string
   defaultValue: string
-  onValueChange: () => void
-  ariaLabel: string
+  onValueChange: (value: string) => void
+  disabled?: boolean
 }
 
 export const TabSwitcher = (props: TabSwitcherProps) => {
-  const { tabs, label, defaultValue, onValueChange, ariaLabel } = props
+  const { tabs, label, defaultValue, onValueChange } = props
 
   return (
-    <>
-      <Typography variant={'body_2'} className={s.label}>
-        {label}
-      </Typography>
+    <div className={s.container}>
+      {label && (
+        <Typography variant={'body_1'} className={s.label}>
+          {label}
+        </Typography>
+      )}
       <Tabs.Root className={s.root} defaultValue={defaultValue} onValueChange={onValueChange}>
-        <Tabs.List className={s.list} aria-label={ariaLabel}>
+        <Tabs.List className={s.list} aria-label={label}>
           {tabs.map(el => (
             <TabsTrigger
               key={el.value}
@@ -43,6 +45,6 @@ export const TabSwitcher = (props: TabSwitcherProps) => {
           ))}
         </Tabs.List>
       </Tabs.Root>
-    </>
+    </div>
   )
 }
