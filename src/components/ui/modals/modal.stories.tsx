@@ -1,124 +1,110 @@
-import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 import { Modal } from './'
 import { Button } from '../button'
 import { TextField } from '../text-field'
 import { Typography } from '../typography'
+import { Checkbox } from '../checkbox'
 import { Select } from '../select'
+import { ChangeCover } from '../../../images/svg/icons'
 
 const meta = {
   title: 'Components/Modal',
-  component: Modal,
+  component: Modal.Root,
   tags: ['autodocs'],
-  argTypes: {
-    onClose: { action: 'onCloseAction' },
-    renderCancelButton: { control: 'Cancel Button' },
-    renderActionButton: { control: 'Action Button' },
-    showSeparator: {
-      options: [true, false],
-      control: { type: 'boolean' },
-    },
-    showCloseButton: {
-      options: [true, false],
-      control: { type: 'boolean' },
-    },
-    title: { control: 'string' },
-    size: { control: 'modal size' },
-    children: { control: 'components' },
+  decorators: [
+    Story => (
+      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    trigger: <Button variant={'primary'}>Modal</Button>,
   },
-} satisfies Meta<typeof Modal>
+} satisfies Meta<typeof Modal.Root>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const commonArgs = {
-  children: (
-    <Typography variant={'body_2'}>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci atque blanditiis
-      consequatur corporis culpa, eligendi et excepturi fugit iure laboriosam laborum laudantium
-      modi molestias odio quas rem voluptatum. Dolores?
-    </Typography>
-  ),
-  open: true,
-  title: 'Modals window',
-}
-
 export const Default: Story = {
   args: {
-    ...commonArgs,
-  },
-  render: args => {
-    const [open, setOpen] = useState(false)
-
-    const modalSwitchHandler = () => {
-      setOpen(!open)
-    }
-
-    return (
-      <div>
-        <span>
-          <Button onClick={modalSwitchHandler}>Open dialog</Button>
-        </span>
-
-        <Modal
-          {...args}
-          open={open}
-          onClose={modalSwitchHandler}
-          renderActionButton={() => <Button variant={'primary'}>Save</Button>}
-          renderCancelButton={() => <Button variant={'secondary'}>Cancel</Button>}
-        />
-      </div>
-    )
+    title: 'Title',
+    children: (
+      <>
+        <Modal.Body>
+          <TextField type={'text'} title={'test'} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant={'primary'} type={'submit'}>
+            <Typography variant={'subtitle_2'}>Add New Pack</Typography>
+          </Button>
+          <Button variant={'secondary'}>
+            <Typography variant={'subtitle_2'}>Cancel</Typography>
+          </Button>
+        </Modal.Footer>
+      </>
+    ),
   },
 }
 
-export const DemoModalField: Story = {
+export const Header: Story = {
   args: {
-    ...commonArgs,
-  },
-  render: args => {
-    const [open, setOpen] = useState(false)
-
-    const modalSwitchHandler = () => {
-      setOpen(!open)
-    }
-
-    return (
-      <div>
-        <span>
-          <Button onClick={modalSwitchHandler}>Open dialog</Button>
-        </span>
-
-        <Modal {...args} open={open} onClose={modalSwitchHandler}>
-          <TextField type={'text'} />
-          <TextField type={'password'} />
-          <TextField type={'search'} />
-          <Select items={['1', '2', '3']} />
-        </Modal>
-      </div>
-    )
+    title: 'Header',
   },
 }
 
-export const WithoutCloseButton: Story = {
+export const Content: Story = {
   args: {
-    ...commonArgs,
+    children: (
+      <Modal.Body>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniamdsa
+      </Modal.Body>
+    ),
   },
-  render: args => {
-    const [open, setOpen] = useState(false)
+}
+export const Content_first: Story = {
+  args: {
+    children: (
+      <Modal.Body>
+        <Select fullWidth items={['item1', 'item2', 'item3', 'item4']} />
+        <TextField title={'input'} type={'text'} />
+        <TextField title={'input'} type={'password'} />
+        <Checkbox label={'Check-box'} />
+      </Modal.Body>
+    ),
+  },
+}
+export const Content_second: Story = {
+  args: {
+    title: 'Header',
+    children: (
+      <Modal.Body>
+        <Select label={'select-box'} fullWidth items={['item1', 'item2', 'item3', 'item4']} />
+        <Typography variant={'subtitle_2'}>Question:</Typography>
+        <Button variant={'secondary'}>
+          <ChangeCover />
+          <>Change cover</>
+        </Button>
+        <Typography variant={'subtitle_2'}>Answer:</Typography>
+        <Button variant={'secondary'}>
+          <ChangeCover />
+          <>Change cover</>
+        </Button>
+        <TextField title={'input'} type={'text'} />
+        <Checkbox label={'Check-box'} />
+      </Modal.Body>
+    ),
+  },
+}
 
-    const modalSwitchHandler = () => {
-      setOpen(!open)
-    }
-
-    return (
-      <div>
-        <span>
-          <Button onClick={modalSwitchHandler}>Open dialog</Button>
-        </span>
-
-        <Modal {...args} open={open} onClose={modalSwitchHandler} showCloseButton={false} />
-      </div>
-    )
+export const Footer: Story = {
+  args: {
+    children: (
+      <Modal.Footer>
+        <Button variant={'primary'}>Primary</Button>
+        <Button variant={'secondary'}>Cancel</Button>
+      </Modal.Footer>
+    ),
   },
 }

@@ -1,131 +1,81 @@
-import { ComponentProps, FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-} from '@radix-ui/react-dialog'
-import { clsx } from 'clsx'
-import { AnimatePresence, motion } from 'framer-motion'
-
-import { Close } from '../../../images/svg/icons'
+import * as Dialog from '@radix-ui/react-dialog'
 
 import { Typography } from '../typography'
+import { Close } from '../../../images/svg/icons'
+
+import { clsx } from 'clsx'
 
 import s from './modal.module.scss'
 
-export type ModalSize = 'sm' | 'md' | 'lg'
-
-export type ModalProps = {
-  open: boolean
-  onClose?: () => void
-  renderCancelButton?: () => ReactNode
-  renderActionButton?: () => ReactNode
-  showSeparator?: boolean
-  showCloseButton?: boolean
+type ModalProps = {
   title?: string
-  size?: ModalSize
+  trigger?: ReactNode
+  isOpen?: boolean
+  onOpenChange?: (isOpen: boolean) => void
+  width?: string
   className?: string
-} & ComponentProps<'div'>
-
-const dropIn = {
-  hidden: {
-    y: '-100vh',
-    x: '-50%',
-    opacity: 0,
-  },
-  visible: {
-    y: '-50%',
-    x: '-50%',
-    opacity: 1,
-    transition: {
-      duration: 0.1,
-      type: 'spring',
-      damping: 25,
-      stiffness: 500,
-    },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-  },
+  children?: ReactNode
 }
 
-export const Modal: FC<ModalProps> = ({
-  open = false,
-  size = 'md',
-  title,
-  renderActionButton,
-  renderCancelButton,
-  className,
-  onClose,
-  children,
-  showCloseButton = true,
-}) => {
-  function handleModalClosed() {
-    onClose?.()
-  }
-
+const Root: FC<ModalProps> = ({ title, isOpen, trigger, onOpenChange, children }) => {
   const classNames = {
-    overlay: s.overlay,
-    content: getContentClassName(size, className),
-    header: s.header,
-    title: s.title,
-    closeButton: s.closeButton,
-    contentBox: s.contentBox,
+    content: clsx(s.content),
+    overlay: clsx(s.overlay),
+    body: clsx(s.body),
+    footer: clsx(s.footer),
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleModalClosed}>
-      <AnimatePresence>
-        {open && (
-          <DialogPortal forceMount>
-            <DialogOverlay asChild>
-              <motion.div
-                className={classNames.overlay}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              />
-            </DialogOverlay>
-            <DialogContent className={classNames.content} asChild forceMount>
-              <motion.div variants={dropIn} initial="hidden" animate="visible" exit="exit">
-                <header className={classNames.header}>
-                  <DialogTitle asChild>
-                    <Typography variant={'h2'}>{title}</Typography>
-                  </DialogTitle>
-
-                  {showCloseButton && (
-                    <DialogClose className={classNames.closeButton}>
-                      <Close />
-                    </DialogClose>
-                  )}
-                </header>
-                <div className={classNames.contentBox}>{children}</div>
-                <div className={s.footerBlock}>
-                  <DialogClose className={s.actionButton}>{renderCancelButton?.()}</DialogClose>
-                  <DialogClose className={s.actionButton}>{renderActionButton?.()}</DialogClose>
-                </div>
-              </motion.div>
-            </DialogContent>
-          </DialogPortal>
-        )}
-      </AnimatePresence>
-    </Dialog>
+    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
+      <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className={classNames.overlay} />
+        <Dialog.Content className={classNames.content}>
+          {title && <ModalTitle title={title} />}
+          {children}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
 }
 
-function getContentClassName(size: ModalSize, className?: string) {
-  const sizeClassName = getSizeClassName(size)
-
-  return clsx(className, s.content, sizeClassName)
+type ModalTitleProps = {
+  title: string
+}
+const ModalTitle: FC<ModalTitleProps> = ({ title }) => {
+  return (
+    <Dialog.Title className={s.titleContainer}>
+      <Typography variant={'h2'}>{title}</Typography>
+      <Dialog.Close asChild>
+        <button className={s.closeIcon}>
+          <Close />
+        </button>
+      </Dialog.Close>
+    </Dialog.Title>
+  )
 }
 
-function getSizeClassName(size: ModalSize) {
-  if (size === 'sm') return s.sm
-  if (size === 'md') return s.md
-  if (size === 'lg') return s.lg
+type ModalChildType = {
+  children: ReactNode
+  className?: string
 }
+
+const Body: FC<ModalChildType> = ({ className, children }) => {
+  const classNames = {
+    body: clsx(s.body, className),
+  }
+
+  return <div className={classNames.body}>{children}</div>
+}
+
+const Footer: FC<ModalChildType> = ({ className, children }) => {
+  const classNames = {
+    footer: clsx(s.footer, className),
+  }
+
+  return <div className={classNames.footer}>{children}</div>
+}
+
+export const Modal = { Root, Body, Footer }
