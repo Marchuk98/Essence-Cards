@@ -1,22 +1,21 @@
 import * as AvatarRadix from '@radix-ui/react-avatar'
-
-import { ReactNode } from 'react'
+import { ComponentProps, CSSProperties } from 'react'
 import { clsx } from 'clsx'
 
 import s from './avatar.module.scss'
 
 export type UserAvatarProps = {
-  src?: string
+  src?: ComponentProps<'img'>['src']
   name: string
-  avatarContent?: ReactNode
-  width?: number
-  height?: number
+  size?: CSSProperties['width']
   className?: string
 }
 
 export const UserAvatar = (props: UserAvatarProps) => {
-  const { name, src, avatarContent, width, height, className } = props
+  const { name, src, size, className } = props
 
+  const fallbackText = name?.slice(0, 2).toUpperCase()
+  const avatarSize = { width: size, height: size }
   const classNames = {
     avatarRoot: clsx(s.avatarRoot, className),
     avatar: s.avatar,
@@ -25,10 +24,16 @@ export const UserAvatar = (props: UserAvatarProps) => {
   }
 
   return (
-    <AvatarRadix.Root className={classNames.avatarRoot} style={{ width, height }}>
-      <AvatarRadix.Image className={classNames.avatar} src={src} alt={name} />
-      {avatarContent && <div className={classNames.icon}>{avatarContent}</div>}
-      <AvatarRadix.Fallback className={classNames.fallback}>{name[0]}</AvatarRadix.Fallback>
+    <AvatarRadix.Root className={classNames.avatarRoot} tabIndex={0}>
+      <AvatarRadix.Image
+        className={classNames.avatar}
+        src={src}
+        alt={'user avatar'}
+        style={avatarSize}
+      />
+      <AvatarRadix.Fallback style={avatarSize} className={classNames.fallback}>
+        {fallbackText}
+      </AvatarRadix.Fallback>
     </AvatarRadix.Root>
   )
 }
