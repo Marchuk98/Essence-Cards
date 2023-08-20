@@ -36,6 +36,7 @@
 
   background: var(--color-dark-900);
   border-bottom: 0.06rem solid var(--color-dark-500);
+
 }
 
 .title {
@@ -58,5 +59,15 @@
   width: 1rem;
 
   transition: transform 0.3s ease-in-out;
+}
+
+.tableHead {
+  transform-origin: center bottom;
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    transform: scale(1.15);
+    color: var(--color-light-900);
+  }
 }
 

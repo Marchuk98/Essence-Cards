@@ -36,14 +36,16 @@ const Head: FC<HeadProps> = ({ columns, sort, onSort, className, ...rest }) => {
   const handlerSort = (key: string, sortable?: boolean) => {
     if (!onSort || !sortable) return
 
-    if (key !== sort?.columnKey) {
-      return onSort({ columnKey: key, direction: 'asc' })
-    }
-    if (sort.direction === 'asc') {
-      return onSort({ columnKey: key, direction: 'desc' })
-    }
+    let newSort: Sort
 
-    onSort(null)
+    if (key !== sort?.columnKey) {
+      newSort = { columnKey: key, direction: 'asc' }
+    } else if (sort.direction === 'asc') {
+      newSort = { columnKey: key, direction: 'desc' }
+    } else {
+      newSort = null
+    }
+    onSort(newSort)
   }
 
   return (
@@ -102,6 +104,7 @@ const HeadCell: FC<HeadCellProps> = ({
     th: clsx(s.headCell, !sortable && s.noSort, className),
     title: clsx(s.title),
     icon: clsx(s.sortDscIcon, sort?.direction === 'asc' && s.sortAscIcon),
+    text: clsx(s.tableHead),
   }
   const showSortIcon = sort?.columnKey === columnKey && sort?.direction
   const handleClick = () => {
@@ -113,7 +116,7 @@ const HeadCell: FC<HeadCellProps> = ({
   return (
     <th className={classNames.th} {...rest} onClick={handleClick}>
       <div className={classNames.title}>
-        <Typography variant={'subtitle_2'}>{title}</Typography>
+        <Typography variant={'subtitle_2'} className={classNames.text}>{title}</Typography>
         <div className={classNames.icon}>{showSortIcon && <ChevronDown />}</div>
       </div>
     </th>
