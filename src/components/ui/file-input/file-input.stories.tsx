@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 import { FileInput } from './file-input.tsx'
 import { Button } from '../button'
-import { Edit } from '../../../images/svg/icons'
 
 const meta = {
   title: 'Components/FileInput',
@@ -18,37 +16,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof FileInput>
 
-export const UploadWithButton: Story = {
-  render: args => {
-    const [file, setFile] = useState('')
-    const changeFileHandler = (file: File) => setFile(file.name)
-
-    return (
-      <div>
-        <FileInput
-          {...args}
-          onChange={changeFileHandler}
-          trigger={
-            <Button variant={'secondary'} disabled={args.disabled}>
-              Upload file
-            </Button>
-          }
-        />
-        <div>{file}</div>
-      </div>
-    )
-  },
-}
-export const UploadWithIcon: Story = {
-  render: args => {
-    const [file, setFile] = useState('')
-    const changeFileHandler = (file: File) => setFile(file.name)
-
-    return (
-      <div>
-        <FileInput {...args} onChange={changeFileHandler} trigger={<Edit />} />
-        <div>{file}</div>
-      </div>
-    )
+export const Default: Story = {
+  args: {
+    name: 'cover',
+    withPreview: true,
+    children: onClick => (
+      <Button type={'button'} variant={'secondary'} onClick={onClick}>
+        Change cover
+      </Button>
+    ),
   },
 }
