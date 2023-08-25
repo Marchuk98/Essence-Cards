@@ -3,6 +3,9 @@ import { PATH } from '../../../common'
 import { TableActionButton } from '../../ui/table-action-button/table-action-button.tsx'
 import { usePacks } from '../../../services/packs/hooks/usePacks.ts'
 import { ItemType } from '../../../services/packs/packs-endpoints/packs.types.ts'
+import icons from '../../../images/react.png'
+
+import s from './pack-table-body.module.scss'
 
 type PackTableBodyType = {
   packContent: ItemType[]
@@ -16,7 +19,17 @@ export const PackTableBody = ({ packContent }: PackTableBodyType) => {
       {packContent.map(item => (
         <Table.Row key={item.id}>
           <Table.TableCell>
-            <Typography variant={'link_1'} as={'a'} href={`${PATH.CARDS}/${item.id}`}>
+            <Typography
+              className={s.cellContent}
+              variant={'link_1'}
+              as={'a'}
+              href={`${PATH.CARDS}/${item.id}`}
+            >
+              {item.cover === null ? (
+                <img src={icons} alt={'default icons name'} />
+              ) : (
+                <img className={s.cellImgContent} src={item.cover} alt={'icons for name'} />
+              )}
               {item.name}
             </Typography>
           </Table.TableCell>
@@ -34,7 +47,7 @@ export const PackTableBody = ({ packContent }: PackTableBodyType) => {
           <Table.TableCell>
             <TableActionButton
               isActiveActions={item.userId === isMe}
-              pack={{ id: item.id, packName: item.name, isPrivate: item.isPrivate }}
+              pack={{ id: item.id, name: item.name, isPrivate: item.isPrivate, cover: item.cover }}
             />
           </Table.TableCell>
         </Table.Row>
