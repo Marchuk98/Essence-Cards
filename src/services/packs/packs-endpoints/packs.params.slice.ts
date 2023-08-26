@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { GetCardsRequestType, GetParamsPacksType } from './packs.types.ts'
+import { GetParamsPacksType } from './packs.types.ts'
 
 type initialStateType = {
   queryParams: GetParamsPacksType
@@ -22,7 +22,7 @@ const slice = createSlice({
   name: 'packsParams',
   initialState,
   reducers: {
-    setQueryParams: (state, action: PayloadAction<Partial<GetCardsRequestType>>) => {
+    setQueryParams: (state, action: PayloadAction<GetParamsPacksType>) => {
       state.queryParams = { ...state.queryParams, ...action.payload }
     },
   },
