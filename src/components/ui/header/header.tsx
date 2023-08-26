@@ -6,7 +6,8 @@ import { Button } from '../button'
 import { LogoCardProject, Logout, Person } from '../../../images/svg/icons'
 
 import s from './header.module.scss'
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { PATH } from '../../../common'
 
 type HeaderProps = {
   isAuth: boolean
@@ -19,12 +20,11 @@ type HeaderProps = {
 }
 
 export const Header = (props: HeaderProps) => {
-  // TODO:  в линку сделать редирект на pack-list потом
   const { isAuth, name, email, avatar, onProfileSelect, onSignIn, onSignOut } = props
 
   return (
     <header className={s.header}>
-      <Link to={'/'} className={s.logoLink}>
+      <Link to={PATH.PACKS} className={s.logoLink}>
         <LogoCardProject />
       </Link>
       {isAuth ? (
@@ -34,13 +34,13 @@ export const Header = (props: HeaderProps) => {
               <Typography className={s.userName} variant={'body_2'} as={'label'}>
                 {name}
               </Typography>
-              <UserAvatar name={'header Name'} src={avatar} width={36} height={36} />
+              <UserAvatar name={'header Name'} src={avatar} size={'2.5rem'} />
             </button>
           }
         >
           <DropdownItem>
             <div className={s.userInfoContainer}>
-              <UserAvatar name={'dropdown Name'} src={avatar} width={36} height={36} />
+              <UserAvatar name={'dropdown Name'} src={avatar} size={'2.25rem'} />
               <div className={s.userDetails}>
                 <Typography variant="body_2">{name}</Typography>
                 <Typography variant="caption" className={s.userEmail}>

@@ -1,6 +1,6 @@
 import { useGetMeQuery, useLogoutMutation, util } from '../../../auth'
 import { Page } from '../../../../components/ui'
-import { PersonalInformation, UpdateProfileType } from '../../../../components/auth'
+import { PersonalInformation } from '../../../../components/auth'
 import { useUpdateUserMutation } from '../../profile-endpoints'
 import { useAppDispatch } from '../../../../app/store.ts'
 import { useNavigate } from 'react-router-dom'
@@ -14,12 +14,11 @@ export const Profile = () => {
   const [logout] = useLogoutMutation()
   const [updateUser] = useUpdateUserMutation()
 
-  const onSaveChanges = (updatedData: UpdateProfileType) => {
+  const onSaveChanges = (value: string | undefined) => {
     if (data) {
       const form = new FormData()
 
-      updatedData.name && form.append('name', updatedData.name)
-      updatedData.avatar && form.append('avatar', updatedData.avatar)
+      form.append('name', value ? value : '')
       updateUser(form)
     }
   }
@@ -42,7 +41,7 @@ export const Profile = () => {
         name={data.name}
         email={data.email}
         avatar={data.avatar}
-        onChangeProfile={onSaveChanges}
+        onSaveChanges={onSaveChanges}
         onLogout={logOut}
       />
     </Page>

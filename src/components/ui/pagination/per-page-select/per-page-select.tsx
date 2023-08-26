@@ -3,7 +3,7 @@ import { Select } from '../../select'
 import s from './per-page-select.module.scss'
 
 export type PerPageSelectPropsType = {
-  perPage: string
+  perPage: number
   perPageOptions: string[]
   onPerPageChange: (itemPerPage: string) => void
 }

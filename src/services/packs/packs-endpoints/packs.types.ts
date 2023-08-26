@@ -1,5 +1,5 @@
 import { ResponseUserType } from '../../auth'
-import {GradeType} from "../../../components/ui";
+import { GradeType } from '../../../components/ui'
 
 type PackAuthorType = Pick<ResponseUserType, 'id' | 'name'>
 
@@ -10,7 +10,7 @@ export type ItemType = {
   name: string
   isPrivate: boolean
   shots: number
-  cover: string
+  cover?: string
   rating: number
   created: string
   updated: string
@@ -31,23 +31,18 @@ export type ResponsePacksType = {
 }
 
 export type GetParamsPacksType = {
-  minCardsCount: string
-  maxCardsCount: string
-  name: string
-  authorId: string
-  orderBy: string
-  currentPage: number
-  itemsPerPage: number
+  minCardsCount?: number
+  maxCardsCount?: number
+  name?: string
+  authorId?: string
+  orderBy?: string
+  currentPage?: number
+  itemsPerPage?: number
 }
 
 export type CreatePackRequestType = FormData
 
-export type UpdatePackResponseType = {
-  id: string
-  cover?: string
-  name: string
-  isPrivate: boolean
-}
+export type UpdatePackResponseType = { formData: CreatePackRequestType; id: string }
 
 export type CardType = {
   id: string
@@ -71,11 +66,12 @@ export type GetCardsResponseType = {
   pagination: PaginationType
 }
 export type GetCardsRequestType = {
+  id: string
   question?: string
-  answer?: string
-  orderBy?: string
-  currentPage?: number
-  itemsPerPage?: number
+  answer: string
+  orderBy: string
+  currentPage: number
+  itemsPerPage: number
 }
 
 export type GradesParamsCardType = {

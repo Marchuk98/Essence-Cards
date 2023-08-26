@@ -3,6 +3,7 @@ import { Button, FileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../images/svg/icons'
 import { useAddPackForm } from '../../../common/schemas/use-add-pack-schema.ts'
+import { toast } from 'react-toastify'
 
 type AddPackModalType = {
   title: string
@@ -15,7 +16,14 @@ type AddPackModalType = {
 export const AddPackModal = (props: AddPackModalType) => {
   const { title, trigger, setIsOpenAddPack, onSubmitHandler, isOpenAddPack } = props
 
-  const { handleSubmit, control, reset } = useAddPackForm()
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useAddPackForm()
+
+  if (errors.cover) toast.error(`${errors.cover.message}`)
 
   const onSubmit = handleSubmit(data => {
     const form = new FormData()

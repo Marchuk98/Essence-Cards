@@ -28,16 +28,3 @@ export const Default = () => {
 
   return <Slider {...args} onValueChange={setValues} value={values} />
 }
-
-export const Slider_Control_With_Label = () => {
-  const [values, setValues] = useState<[number, number]>([0, 100])
-
-  const args = {
-    value: values,
-    minValue: values[0],
-    maxValue: values[1],
-    label: 'Slider control number',
-  }
-
-  return <Slider {...args} onValueChange={setValues} value={values} />
-}

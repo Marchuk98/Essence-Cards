@@ -5,6 +5,7 @@ import { ControlledCheckbox, ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../images/svg/icons'
 
 type EditPackModalType = {
+  title: string
   trigger: ReactNode
   setIsOpenEditPack: (value: boolean) => void
   onSubmitHandler: (data: EditPackForm) => void
@@ -16,6 +17,7 @@ type EditPackModalType = {
 
 export const EditPackModal = (props: EditPackModalType) => {
   const {
+    title,
     trigger,
     setIsOpenEditPack,
     onSubmitHandler,
@@ -37,7 +39,7 @@ export const EditPackModal = (props: EditPackModalType) => {
       isOpen={isOpenEditPack}
       onOpenChange={setIsOpenEditPack}
       trigger={trigger}
-      title={'Edit Pack'}
+      title={title}
     >
       <form onSubmit={onSubmit}>
         <Modal.Body>

@@ -16,3 +16,6 @@ export * from './CloseIcon'
 export * from './Eye'
 export * from './EyeOff'
 export * from './Search'
+export * from './ChangeCover'
+
+

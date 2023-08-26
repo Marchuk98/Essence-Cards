@@ -12,7 +12,7 @@ export type UserAvatarProps = {
 }
 
 export const UserAvatar = (props: UserAvatarProps) => {
-  const { name, src, size, className } = props
+  const { name, src, size = '3rem', className } = props
 
   const fallbackText = name?.slice(0, 2).toUpperCase()
   const avatarSize = { width: size, height: size }

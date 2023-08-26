@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import { clsx } from 'clsx'
 import { useCreateBlob } from '../../../common/constants/useBlob.ts'
-import preview from '../../../images/react.png'
+import preview from '../../../images/upload-file.png'
 
 import s from './file-input.module.scss'
 

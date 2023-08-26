@@ -23,6 +23,7 @@ export const Default: Story = {
     return (
       <div>
         <EditPackModal
+          title={'Edit Pack'}
           trigger={
             <>
               <Edit onClick={isOpenModalHandler} />

@@ -7,12 +7,12 @@ import s from './pagination.module.scss'
 
 type PaginationConditionals =
   | {
-      perPage?: null
+      perPage?: number
       perPageOptions?: never
       onPerPageChange?: never
     }
   | {
-      perPage: string
+      perPage?: number
       perPageOptions: string[]
       onPerPageChange?: (itemPerPage: string) => void
     }
@@ -22,7 +22,7 @@ export type PaginationProps = {
   page?: number
   onChange?: (page: number) => void
   siblings?: number
-  perPage?: string | null
+  perPage?: number
   perPageOptions?: string[]
   onPerPageChange?: (itemPerPage: string) => void
 } & PaginationConditionals
@@ -31,7 +31,7 @@ export const Pagination = ({
   onChange,
   totalCount = 10,
   page = 1,
-  perPage = null,
+  perPage,
   perPageOptions,
   onPerPageChange,
   siblings,

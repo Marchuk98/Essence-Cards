@@ -1,14 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PATH } from '../constants'
-import { Packs } from '../../services/packs/components/packs/packs.tsx'
-import { Login } from '../../services'
+import { Packs } from '../../services/packs/components/packs.tsx'
+import { Login, Register, PasswordRecovery, CheckEmail, NewPassword, Profile } from '../../services'
 import { ProtectedRoutes } from './protected-routes.tsx'
 import { App } from '../../app/App.tsx'
-import { Register } from '../../services'
-import { PasswordRecovery } from '../../services'
-import { CheckEmail } from '../../services'
-import { NewPassword } from '../../services'
-import { Profile } from '../../services'
+import { Learn } from '../../services/learn/components/learn.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +21,10 @@ export const router = createBrowserRouter([
           {
             path: PATH.PROFILE,
             element: <Profile />,
+          },
+          {
+            path: PATH.LEARN,
+            element: <Learn />,
           },
         ],
       },
