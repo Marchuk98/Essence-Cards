@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  margin-top: 2rem;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .filterPanel {
+    margin-top: 15px;
+    margin-bottom: 35px;
+
+  }
+}
