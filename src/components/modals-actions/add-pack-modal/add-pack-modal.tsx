@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Button, FileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
-import { ChangeCover } from '../../../images/svg/icons'
+import { ChangeCover } from '../../../assets/icons'
 import { useAddPackForm } from '../../../common/schemas/use-add-pack-schema.ts'
 import { toast } from 'react-toastify'
 

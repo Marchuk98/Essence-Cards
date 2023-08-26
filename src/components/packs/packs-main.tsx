@@ -64,7 +64,7 @@ export const PacksMain = () => {
           sliderValues={sliderValues}
           onValueCommit={setSliderRange}
           onValueChange={setSliderValues}
-          isMe={isMe ?? ''}
+          isMe={isMe || ''}
           resetFilters={resetFilters}
         />
       </div>

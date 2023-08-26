@@ -1,9 +1,9 @@
 import { Table, Typography } from '../../ui'
 import { PATH } from '../../../common'
-import { TableActionButton } from '../../ui/table-action-button/table-action-button.tsx'
+import { TableActionButton } from '../../ui/table-action-button'
 import { usePacks } from '../../../services/packs/hooks/usePacks.ts'
 import { ItemType } from '../../../services/packs/packs-endpoints/packs.types.ts'
-import icons from '../../../images/react.png'
+import icons from '../../../assets/images/react.png'
 
 import s from './pack-table-body.module.scss'
 

@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { EditPackForm, useEditPackForm } from '../../../common'
 import { Button, FileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
-import { ChangeCover } from '../../../images/svg/icons'
+import { ChangeCover } from '../../../assets/icons'
 
 type EditPackModalType = {
   title: string

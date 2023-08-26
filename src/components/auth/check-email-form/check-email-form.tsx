@@ -1,9 +1,8 @@
 import { Button, Card, Typography } from '../../ui'
-
-import { MailIcon } from '../../../images/svg/icons'
+import { MailIcon } from '../../../assets/icons'
+import { PATH } from '../../../common'
 
 import s from './check-email-form.module.scss'
-import { PATH } from '../../../common'
 
 export type CheckEmailFormProps = {
   email: string

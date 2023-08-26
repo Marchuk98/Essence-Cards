@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Logout } from '../../../images/svg/icons'
+import { Logout } from '../../../assets/icons'
 
 import { Button } from './'
 

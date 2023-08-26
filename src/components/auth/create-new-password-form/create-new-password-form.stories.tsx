@@ -12,6 +12,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    linkPath: '/createNewPassword',
+    onSubmitHandler: data => console.log(data),
   },
 }

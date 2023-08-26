@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, KeyboardEvent, ReactNode, useStat
 
 import clsx from 'clsx'
 
-import { Close, Eye, EyeOff, Search } from '../../../images/svg/icons'
+import { Close, Eye, EyeOff, Search } from '../../../assets/icons'
 import { Typography } from '../typography'
 
 import s from './text-field.module.scss'

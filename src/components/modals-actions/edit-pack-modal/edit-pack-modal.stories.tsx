@@ -1,6 +1,6 @@
 import { EditPackModal } from './'
 import { Meta, StoryObj } from '@storybook/react'
-import { Edit } from '../../../images/svg/icons'
+import { Edit } from '../../../assets/icons'
 import { useState } from 'react'
 
 const meta = {

@@ -1,12 +1,8 @@
-import { ForgotPasswordInput, UseForgotPasswordForm } from '../../../common'
-
+import { ForgotPasswordInput, UseForgotPasswordForm, PATH } from '../../../common'
 import { ControlledTextField } from '../../controlled'
-
 import { Button, Card, Typography } from '../../ui'
 
 import s from './forgot-password-form.module.scss'
-
-import { PATH } from '../../../common'
 
 export type ForgotPasswordFormProps = {
   onSubmitHandler: (data: ForgotPasswordInput) => void

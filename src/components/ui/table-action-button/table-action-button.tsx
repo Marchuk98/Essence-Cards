@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Edit, Play, Trash } from '../../../images/svg/icons'
+import { Edit, Play, Trash } from '../../../assets/icons'
 import { PATH } from '../../../common'
 import { useState } from 'react'
 import { EditPackModal, DeleteModal } from '../../modals-actions'

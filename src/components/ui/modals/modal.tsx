@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { Typography } from '../typography'
-import { Close } from '../../../images/svg/icons'
+import { Close } from '../../../assets/icons'
 
 import { clsx } from 'clsx'
 

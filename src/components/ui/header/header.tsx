@@ -1,13 +1,12 @@
 import { CustomDropdownMenu, DropdownItem, DropdownItemWithIcon } from '../dropdown-menu'
-
 import { UserAvatar } from '../avatar'
 import { Typography } from '../typography'
 import { Button } from '../button'
-import { LogoCardProject, Logout, Person } from '../../../images/svg/icons'
-
-import s from './header.module.scss'
+import { LogoCardProject, Logout, Person } from '../../../assets/icons'
 import { Link } from 'react-router-dom'
 import { PATH } from '../../../common'
+
+import s from './header.module.scss'
 
 type HeaderProps = {
   isAuth: boolean

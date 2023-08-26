@@ -12,7 +12,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    linkPath: '/checkEmail',
     email: 'Beglov00234@mail.ru',
   },
 }

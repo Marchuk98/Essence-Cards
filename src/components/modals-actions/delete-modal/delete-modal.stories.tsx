@@ -1,6 +1,6 @@
 import { DeleteModal } from './'
 import { Meta, StoryObj } from '@storybook/react'
-import { Trash } from '../../../images/svg/icons'
+import { Trash } from '../../../assets/icons'
 import { useState } from 'react'
 
 const meta = {

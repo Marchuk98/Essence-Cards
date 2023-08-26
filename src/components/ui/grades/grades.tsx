@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from 'react'
-import { StarIcon, StarOutlineIcon } from '../../../images/svg/icons'
+import { StarIcon, StarOutlineIcon } from '../../../assets/icons'
 
 import { clsx } from 'clsx'
 

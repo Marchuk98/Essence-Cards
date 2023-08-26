@@ -5,7 +5,7 @@ import { TextField } from '../text-field'
 import { Typography } from '../typography'
 import { Checkbox } from '../checkbox'
 import { Select } from '../select'
-import { ChangeCover } from '../../../images/svg/icons'
+import { ChangeCover } from '../../../assets/icons'
 
 const meta = {
   title: 'Components/Modal',

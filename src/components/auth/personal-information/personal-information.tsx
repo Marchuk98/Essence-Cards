@@ -2,7 +2,7 @@ import { Button, Card, FileInput, Typography, UserAvatar } from '../../ui'
 
 import { ProfileAvatarForm, UseProfileAvatarForm } from '../../../common'
 
-import { Edit, Logout } from '../../../images/svg/icons'
+import { Edit, Logout } from '../../../assets/icons'
 
 import { EditableTextField } from '../../ui/editable-text-field'
 import { useGetMeQuery, useUpdateUserMutation } from '../../../services'

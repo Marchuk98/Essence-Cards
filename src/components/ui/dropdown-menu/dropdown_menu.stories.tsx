@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { CustomDropdownMenu, DropdownItemWithIcon } from './'
-import { Edit, Play, Trash } from '../../../images/svg/icons'
+import { Edit, Play, Trash } from '../../../assets/icons'
 import { Button } from '../button'
 
 const meta = {

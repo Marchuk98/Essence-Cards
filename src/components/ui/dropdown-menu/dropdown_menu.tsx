@@ -4,7 +4,7 @@ import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 import { AnimatePresence, motion, MotionProps, Variants } from 'framer-motion'
 import { Typography } from '../typography'
-import { More } from '../../../images/svg/icons'
+import { More } from '../../../assets/icons'
 
 import s from './dropdown_menu.module.scss'
 

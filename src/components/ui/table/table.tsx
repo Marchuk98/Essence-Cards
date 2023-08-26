@@ -2,7 +2,7 @@ import { ComponentProps, ComponentPropsWithoutRef, FC } from 'react'
 import { clsx } from 'clsx'
 
 import { Typography } from '../typography'
-import { ChevronDown } from '../../../images/svg/icons'
+import { ChevronDown } from '../../../assets/icons'
 
 import s from './table.module.scss'
 

@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 
 import { Typography } from '../typography'
 
-import { CheckMark } from '../../../images/svg/icons'
+import { CheckMark } from '../../../assets/icons'
 
 import s from './checkbox.module.scss'
 

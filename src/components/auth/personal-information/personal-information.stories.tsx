@@ -1,10 +1,19 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { PersonalInformation } from './'
+import { Provider } from 'react-redux'
+import { store } from '../../../app/store.ts'
 
 const meta = {
   title: 'Auth/Personal information',
   component: PersonalInformation,
   tags: ['autodocs'],
+  decorators: [
+    Story => (
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    ),
+  ],
 } satisfies Meta<typeof PersonalInformation>
 
 export default meta

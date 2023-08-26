@@ -2,7 +2,7 @@ import { TextField } from '../text-field'
 import { TabSwitcher } from '../tabSwitcher'
 import { Slider } from '../slider'
 import { Button } from '../button'
-import { Trash } from '../../../images/svg/icons'
+import { Trash } from '../../../assets/icons'
 import { Typography } from '../typography'
 
 import s from './filter-panel.module.scss'

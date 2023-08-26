@@ -1,4 +1,4 @@
-import { KeyboardArrowLeft, KeyboardArrowRight } from '../../../../images/svg/icons'
+import { KeyboardArrowLeft, KeyboardArrowRight } from '../../../../assets/icons'
 
 import s from './navigation-buttons.module.scss'
 

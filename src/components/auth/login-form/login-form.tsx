@@ -1,9 +1,8 @@
 import { Button, Card, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
-import { LoginFormInputs, useLoginForm } from '../../../common'
+import { LoginFormInputs, useLoginForm, PATH } from '../../../common'
 
 import s from './login-form.module.scss'
-import { PATH } from '../../../common'
 
 type LoginFormProps = {
   onSubmitHandler: (data: LoginFormInputs) => void
