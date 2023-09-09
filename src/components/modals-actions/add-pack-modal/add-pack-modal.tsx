@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { Button, FileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../assets/icons'
-import { useAddPackForm } from '../../../common/schemas/use-add-pack-schema.ts'
+import { useAddPackForm } from '../../../common'
 import { toast } from 'react-toastify'
 
 type AddPackModalType = {
@@ -28,10 +28,16 @@ export const AddPackModal = (props: AddPackModalType) => {
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
 
-    form.append('name', data.name),
-      form.append('isPrivate', String(data.isPrivate)),
-      form.append('cover', data.cover),
-      onSubmitHandler(form)
+    form.append('name', data.name)
+    form.append('isPrivate', String(data.isPrivate))
+    const appendFile = (key: string, value: File | string) => {
+      if (value && typeof value !== 'string' && (value as File).name !== 'cover.png') {
+        form.append(key, value as File)
+      }
+    }
+
+    appendFile('cover', data.cover)
+    onSubmitHandler(form)
 
     setIsOpenAddPack(false)
     reset()
