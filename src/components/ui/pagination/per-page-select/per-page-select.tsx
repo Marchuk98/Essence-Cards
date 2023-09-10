@@ -16,7 +16,7 @@ export const PerPageSelect = ({
   return (
     <div className={s.selectBox}>
       Rows
-      <Select value={perPage} items={perPageOptions} onChange={onPerPageChange} />
+      <Select value={`${perPage}`} items={perPageOptions} onChange={onPerPageChange} />
       per page
     </div>
   )
