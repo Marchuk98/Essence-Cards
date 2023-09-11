@@ -1,17 +1,13 @@
 import { useState } from 'react'
 import { Sort } from '../../components/ui'
-import { packsActions } from '../../services/packs/packs-endpoints/packs.params.slice.ts'
-import { useAppDispatch } from '../../app/store.ts'
 
 export const useSort = () => {
   const [sort, setSort] = useState<Sort>(null)
-  const dispatch = useAppDispatch()
-  const setSortValue = (newSort: Sort) => {
-    setSort(newSort)
+  const setSortValue = (sort: Sort, handler: (sort: string) => void) => {
     const sortValue =
-      newSort?.direction === undefined || null ? '' : `${newSort?.columnKey}-${newSort?.direction}`
+      sort?.direction === undefined || null ? '' : `${sort?.columnKey}-${sort?.direction}`
 
-    dispatch(packsActions.setQueryParams({ orderBy: sortValue }))
+    handler(sortValue)
   }
 
   return {
