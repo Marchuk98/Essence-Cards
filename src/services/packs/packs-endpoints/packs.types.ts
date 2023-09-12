@@ -3,7 +3,7 @@ import { GradeType } from '../../../components/ui'
 
 type PackAuthorType = Pick<ResponseUserType, 'id' | 'name'>
 
-export type ItemType = {
+export type PackType = {
   author: PackAuthorType
   id: string
   userId: string
@@ -25,7 +25,7 @@ export type PaginationType = {
 }
 
 export type ResponsePacksType = {
-  items: ItemType[]
+  items: PackType[]
   pagination: PaginationType
   maxCardsCount: number
 }
@@ -66,12 +66,12 @@ export type GetCardsResponseType = {
   pagination: PaginationType
 }
 export type GetCardsRequestType = {
-  id: string
+  id?: string
   question?: string
-  answer: string
-  orderBy: string
-  currentPage: number
-  itemsPerPage: number
+  answer?: string
+  orderBy?: string
+  currentPage?: number
+  itemsPerPage?: number
 }
 
 export type GradesParamsCardType = {
@@ -80,4 +80,9 @@ export type GradesParamsCardType = {
   grade: GradeType
 }
 
-
+export type packItem = {
+  id: string
+  name: string
+  isPrivate: boolean
+  cover: string | undefined
+}
