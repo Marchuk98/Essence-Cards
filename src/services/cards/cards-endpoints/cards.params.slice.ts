@@ -18,7 +18,7 @@ const initialState: initialStateType = {
 }
 
 const slice = createSlice({
-  name: 'packsParams',
+  name: 'cardsParams',
   initialState,
   reducers: {
     setQueryParams: (state, action: PayloadAction<Partial<GetCardsRequestType>>) => {
