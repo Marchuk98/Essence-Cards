@@ -1,0 +1,31 @@
+.backArrow {
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  width: fit-content;
+  margin-top: 24px;
+  margin-bottom: 33px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 33px 36px 29px;
+
+  .title {
+    text-align: center;
+  }
+}
