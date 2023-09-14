@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .backArrow {
+    cursor: pointer;
+
+    position: relative;
+
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    width: fit-content;
+    margin-top: 24px;
+    margin-bottom: 33px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    .namePack {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+  }
+
+  .packCover {
+    width: 170px;
+    height: 107px;
+    margin-bottom: 25px;
+    border-radius: 2px;
+
+    .cover {
+      cursor: pointer;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      border-radius: 2px;
+    }
+  }
+
+  .search {
+    margin-bottom: 25px;
+  }
+
+}
+
+
+
