@@ -1,0 +1,18 @@
+.cellContent {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.cellText {
+  max-width: 150px;
+  word-break: break-word;
+}
+
+.cellImgContent {
+  height: 48px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.125rem;
+}
