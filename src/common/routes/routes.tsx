@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PATH } from '../constants'
-import { Packs } from '../../services/packs/components/packs.tsx'
+import { Packs } from '../../services/packs/components'
 import { Login, Register, PasswordRecovery, CheckEmail, NewPassword, Profile } from '../../services'
 import { ProtectedRoutes } from './protected-routes.tsx'
 import { App } from '../../app/App.tsx'
 import { Learn } from '../../services/learn/components/learn.tsx'
+import { Cards } from '../../services/cards/components/cards.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           {
-            path: PATH.PACKS,
+            index: true,
             element: <Packs />,
           },
           {
@@ -23,7 +24,11 @@ export const router = createBrowserRouter([
             element: <Profile />,
           },
           {
-            path: PATH.LEARN,
+            path: PATH.CARDS + PATH.ID,
+            element: <Cards />,
+          },
+          {
+            path: PATH.LEARN + PATH.ID,
             element: <Learn />,
           },
         ],
