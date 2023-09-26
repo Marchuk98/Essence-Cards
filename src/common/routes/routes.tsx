@@ -6,11 +6,14 @@ import { ProtectedRoutes } from './protected-routes.tsx'
 import { App } from '../../app/App.tsx'
 import { Learn } from '../../services/learn/components/learn.tsx'
 import { Cards } from '../../services/cards/components/cards.tsx'
+import { PageNotFound } from '../../components/ui/page-not-found'
+import { VerifyMail } from '../../components/auth/verify-mail/verify-mail.tsx'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <PageNotFound />,
     children: [
       {
         element: <ProtectedRoutes />,
@@ -52,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: PATH.NEW_PASSWORD,
         element: <NewPassword />,
+      },
+      {
+        path: PATH.VERIFY,
+        element: <VerifyMail />,
       },
     ],
   },
