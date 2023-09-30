@@ -16,4 +16,17 @@
     margin-bottom: 35px;
 
   }
+
+  .emptyFindPack{
+    padding: 36px 0;
+    font-size: 2rem;
+    color: var(--color-dark-300);
+    text-align: center;
+  }
+
+  .skeletonPagination{
+    display: flex;
+    justify-content: center;
+  }
+
 }
