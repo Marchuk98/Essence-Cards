@@ -28,7 +28,7 @@ const appSlice = createSlice({
       .addMatcher(
         action =>
           action.type.endsWith('executeMutation/rejected') ||
-          action.type.endsWith('flashCardsAPI/executeQuery/rejected'),
+          action.type.endsWith('commonApi/executeQuery/rejected'),
         (state, action) => {
           if (action.type.endsWith('executeMutation/rejected')) {
             if (action.payload.data) {
@@ -50,7 +50,7 @@ const appSlice = createSlice({
 
               return
             }
-          } else if (action.type.endsWith('flashCardsAPI/executeQuery/rejected')) {
+          } else if (action.type.endsWith('commonApi/executeQuery/rejected')) {
             if (action.payload.data) {
               if (action.payload.data.statusCode === 401) {
                 state.status = 'failed'
