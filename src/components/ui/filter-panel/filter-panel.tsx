@@ -6,6 +6,7 @@ import { Trash } from '../../../assets/icons'
 import { Typography } from '../typography'
 
 import s from './filter-panel.module.scss'
+import { StatusType } from '../../../app/app-slice.ts'
 
 type FilterPanelPropsType = {
   searchValue: string
@@ -18,6 +19,7 @@ type FilterPanelPropsType = {
   myPack: string
   isMe: string
   resetFilters: () => void
+  status: StatusType
 }
 
 export const FilterPanel = (props: FilterPanelPropsType) => {
@@ -32,6 +34,7 @@ export const FilterPanel = (props: FilterPanelPropsType) => {
     setSearch,
     isMe,
     resetFilters,
+    status,
   } = props
 
   const option = [
@@ -42,6 +45,7 @@ export const FilterPanel = (props: FilterPanelPropsType) => {
   return (
     <div className={s.container}>
       <TextField
+        disabled={status === 'loading'}
         value={searchValue}
         onChange={e => setSearch(e.currentTarget.value)}
         title={''}
@@ -54,6 +58,7 @@ export const FilterPanel = (props: FilterPanelPropsType) => {
         label={'Show packs cards'}
         defaultValue={myPack}
         onValueChange={setMyPacks}
+        disabled={status === 'loading'}
       />
       <Slider
         max={setMaxValue}
@@ -64,8 +69,14 @@ export const FilterPanel = (props: FilterPanelPropsType) => {
         onValueChange={onValueChange}
         label={'Number of cards'}
         className={s.controlSlider}
+        disabled={status === 'loading'}
       />
-      <Button variant={'secondary'} onClick={resetFilters} className={s.controlButton}>
+      <Button
+        disabled={status === 'loading'}
+        variant={'secondary'}
+        onClick={resetFilters}
+        className={s.controlButton}
+      >
         <Trash />
         <Typography variant={'subtitle_2'}>Clear Filter</Typography>
       </Button>
