@@ -11,7 +11,7 @@ export const profileApi = commonApi.injectEndpoints({
           body,
         }
       },
-      invalidatesTags: ['me'],
+      invalidatesTags: ['ME'],
     }),
   }),
 })

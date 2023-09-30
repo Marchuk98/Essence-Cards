@@ -1,7 +1,5 @@
 import { commonApi } from '../../common/base-query-with-reauth.ts'
 
-import { RootState } from '../../../app/store.ts'
-
 import {
   CardType,
   CreatePackRequestType,
@@ -9,7 +7,7 @@ import {
   GetCardsResponseType,
   GetParamsPacksType,
   GradesParamsCardType,
-  ItemType,
+  PackType,
   ResponsePacksType,
   UpdatePackResponseType,
 } from './packs.types.ts'
@@ -24,9 +22,9 @@ export const packsApi = commonApi.injectEndpoints({
           params,
         }
       },
-      providesTags: ['packs'],
+      providesTags: ['UPDATE_PACKS'],
     }),
-    createPack: builder.mutation<ItemType, CreatePackRequestType>({
+    createPack: builder.mutation<PackType, CreatePackRequestType>({
       query: body => {
         return {
           method: 'POST',
@@ -34,45 +32,47 @@ export const packsApi = commonApi.injectEndpoints({
           body,
         }
       },
-      invalidatesTags: ['packs'],
+      invalidatesTags: ['UPDATE_PACKS'],
     }),
-    getPack: builder.query<ItemType, string>({
-      query: id => {
+    getPack: builder.query<PackType, { id: string }>({
+      query: ({ id }) => {
         return {
           method: 'GET',
           url: `decks/${id}`,
         }
       },
-      providesTags: ['packs'],
+      providesTags: ['UPDATE_PACKS'],
     }),
-    updatePack: builder.mutation<ItemType, UpdatePackResponseType>({
-      query: ({ id, cover, name, isPrivate }) => {
+    updatePack: builder.mutation<PackType, UpdatePackResponseType>({
+      query: data => {
         return {
           method: 'PATCH',
-          url: `decks/${id}`,
-          body: { name, cover, isPrivate },
+          url: `decks/${data.id}`,
+          body: data.formData,
         }
       },
-      invalidatesTags: ['packs'],
+      invalidatesTags: ['UPDATE_PACKS'],
     }),
-    deletePack: builder.mutation<Omit<ItemType, 'author'>, string>({
-      query: id => {
+    deletePack: builder.mutation<Omit<PackType, 'author'>, { id: string }>({
+      query: param => {
         return {
           method: 'DELETE',
-          url: `decks/${id}`,
+          url: `decks/${param.id}`,
         }
       },
-      invalidatesTags: ['packs'],
+      invalidatesTags: ['UPDATE_PACKS'],
     }),
-    getCards: builder.query<GetCardsResponseType, { id: string; data: GetCardsRequestType }>({
-      query: ({ id, data }) => {
+    getCards: builder.query<GetCardsResponseType, GetCardsRequestType>({
+      query: args => {
+        const { id, ...params } = args
+
         return {
           method: 'GET',
           url: `decks/${id}/cards`,
-          params: data,
+          params: params,
         }
       },
-      providesTags: ['cards'],
+      providesTags: ['UPDATE_CARDS'],
     }),
     createCard: builder.mutation<CardType, { id: string; data: FormData }>({
       query: ({ id, data }) => {
@@ -82,15 +82,16 @@ export const packsApi = commonApi.injectEndpoints({
           body: data,
         }
       },
-      invalidatesTags: ['cards'],
+      invalidatesTags: ['UPDATE_CARDS'],
     }),
-    learnPack: builder.query<CardType, string>({
-      query: id => {
+    learnPack: builder.query<CardType, { id: string }>({
+      query: ({ id }) => {
         return {
           method: 'GET',
           url: `decks/${id}/learn`,
         }
       },
+      providesTags: ['LEARN_CARD'],
     }),
     updateCardGrade: builder.mutation<void, GradesParamsCardType & GetCardsRequestType>({
       query: ({ id, ...body }) => {
@@ -100,37 +101,7 @@ export const packsApi = commonApi.injectEndpoints({
           body,
         }
       },
-      async onQueryStarted({ id, grade, cardId }, { dispatch, queryFulfilled, getState }) {
-        const state = getState() as RootState
-        const patchResult = dispatch(
-          packsApi.util.updateQueryData(
-            'getCards',
-            {
-              id,
-              data: {
-                itemsPerPage: +state.cardsReducer.pageSize,
-                currentPage: state.cardsReducer.page,
-                orderBy: state.cardsReducer.orderBy,
-                answer: state.cardsReducer.nameToSearch,
-              },
-            },
-            draft => {
-              const card = draft.items.find(card => {
-                return card.id === cardId
-              })
-
-              if (card) card.grade = grade
-            }
-          )
-        )
-
-        try {
-          await queryFulfilled
-        } catch {
-          patchResult.undo()
-        }
-      },
-      invalidatesTags: ['cards', 'card'],
+      invalidatesTags: ['UPDATE_CARDS', 'LEARN_CARD'],
     }),
   }),
   overrideExisting: true,

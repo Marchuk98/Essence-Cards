@@ -19,8 +19,8 @@ export const authApi = commonApi.injectEndpoints({
           url: 'auth/me',
         }
       },
-      extraOptions: { maxRetries: false },
-      providesTags: ['me'],
+      extraOptions: { maxRetries: 0 },
+      providesTags: ['ME'],
     }),
     login: builder.mutation<ResponseLoginType, RequestLoginType>({
       query: body => {
@@ -30,7 +30,7 @@ export const authApi = commonApi.injectEndpoints({
           body,
         }
       },
-      invalidatesTags: ['me'],
+      invalidatesTags: ['ME'],
     }),
     registration: builder.mutation<ResponseRegisterType, RequestRegisterType>({
       query: body => {
@@ -67,6 +67,24 @@ export const authApi = commonApi.injectEndpoints({
         }
       },
     }),
+    verifyMail: builder.mutation<unknown, { code: string }>({
+      query: (body: { code: string }) => {
+        return {
+          method: 'POST',
+          url: `auth/verify-email`,
+          body,
+        }
+      },
+    }),
+    resendEmail: builder.mutation<void, { userId: string; html: string }>({
+      query: (body: { userId: string; html: string }) => {
+        return {
+          method: 'POST',
+          url: `auth/resend-verification-email`,
+          body,
+        }
+      },
+    }),
   }),
 })
 
@@ -77,6 +95,8 @@ export const {
   useRecoveryPasswordMutation,
   useResetPasswordMutation,
   useLogoutMutation,
+  useVerifyMailMutation,
+  useResendEmailMutation,
   util,
 } = authApi
 
