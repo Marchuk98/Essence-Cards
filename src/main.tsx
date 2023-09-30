@@ -7,13 +7,13 @@ import './styles/index.scss'
 import { store } from './app/store.ts'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './common'
-import { Toast } from './components/ui/toast-container'
+import { Toast } from './components/ui'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <Toast />
-    </Provider>
-  </StrictMode>
+  //<StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+    <Toast />
+  </Provider>
+  //  </StrictMode>
 )

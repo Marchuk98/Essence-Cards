@@ -17,5 +17,9 @@ export * from './Eye.tsx'
 export * from './EyeOff.tsx'
 export * from './Search.tsx'
 export * from './ChangeCover.tsx'
+export * from './ArrowLeftIcon.tsx'
+export * from './Page404.tsx'
+
+
 
 

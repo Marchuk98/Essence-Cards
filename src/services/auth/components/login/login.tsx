@@ -1,8 +1,7 @@
 import { LoginForm } from '../../../../components/auth'
-import { useGetMeQuery, useLoginMutation, RequestLoginType } from '../../auth-endpoints'
+import { RequestLoginType, useGetMeQuery, useLoginMutation } from '../../auth-endpoints'
 import { Page } from '../../../../components/ui'
 import { useNavigate } from 'react-router-dom'
-import { PATH } from '../../../../common'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 
@@ -15,7 +14,7 @@ export const Login = () => {
     login(data)
       .unwrap()
       .then(() => {
-        navigate(PATH.PACKS)
+        navigate('/')
         toast.success('you are sign in successful')
       })
       .catch(err => {
@@ -26,7 +25,7 @@ export const Login = () => {
   useEffect(() => {
     if (!data) return
 
-    navigate(PATH.PACKS)
+    navigate('/')
   }, [data])
 
   return (

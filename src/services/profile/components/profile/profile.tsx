@@ -36,13 +36,15 @@ export const Profile = () => {
   if (!data) return <div>...Loading</div>
 
   return (
-    <Page flex>
+    <Page flexTb>
       <PersonalInformation
         name={data.name}
         email={data.email}
         avatar={data.avatar}
         onSaveChanges={onSaveChanges}
         onLogout={logOut}
+        isEmailVerify={data?.isEmailVerified}
+        userId={data.id}
       />
     </Page>
   )
