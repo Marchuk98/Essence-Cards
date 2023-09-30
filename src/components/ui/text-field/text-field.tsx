@@ -39,22 +39,23 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const showError = errorMessage && errorMessage.length > 0
 
-    if (type === 'search') {
-      iconStart = <Search />
-    }
-    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (onEnter && e.key === 'Enter') {
-        onEnter(e)
-      }
-      onKeyDown?.(e)
-    }
-
     const classNames = {
       root: clsx(s.root, className),
       field: clsx(s.field, showError && s.error),
       iconButton: clsx(s.iconButton, disabled && s.disabled),
       iconStart: clsx(s.iconStart),
       label: clsx(s.label),
+      iconDisabled: clsx(disabled && s.iconDisabled),
+    }
+
+    if (type === 'search') {
+      iconStart = <Search className={classNames.iconDisabled} />
+    }
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (onEnter && e.key === 'Enter') {
+        onEnter(e)
+      }
+      onKeyDown?.(e)
     }
 
     const showClearValueIcon = !iconEnd && !showError && onClearValue && value?.length! > 0
@@ -89,7 +90,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
           {type === 'password' && (
             <button className={classNames.iconButton} type="button" onClick={onClickShowValue}>
-              {!showPassword ? <Eye /> : <EyeOff />}
+              {!showPassword ? (
+                <Eye className={classNames.iconDisabled} />
+              ) : (
+                <EyeOff className={classNames.iconDisabled} />
+              )}
             </button>
           )}
 

@@ -1,47 +1,39 @@
 import { useState } from 'react'
-
-import { Meta, StoryObj } from '@storybook/react'
-
-import { Pagination } from './pagination'
+import { Meta, Story } from '@storybook/react'
+import { Pagination, PaginationProps } from './pagination'
 import { Typography } from '../typography'
 
-const meta = {
+export default {
   title: 'Components/Pagination',
   component: Pagination,
-  tags: ['autodocs'],
-  argTypes: {
-    onChange: { action: 'page changed' },
-    siblings: { control: { type: 'number' } },
-    totalCount: { control: { type: 'number' } },
+  args: {
+    totalCount: 100,
+    page: 1,
+    siblings: 1,
+    perPage: 10,
+    perPageOptions: ['10', '20', '50', '100'],
   },
-} satisfies Meta<typeof Pagination>
+} as Meta
 
-export default meta
-type Story = StoryObj<typeof meta>
+export const Default: Story<PaginationProps> = args => {
+  const [page, setPage] = useState(args.page)
+  const [perPage, setPerPage] = useState(args.perPage.toString())
 
-export const Default: Story = {
-  render: args => {
-    const [page, setPage] = useState(1)
-    const [perPage, setPerPage] = useState('10')
-
-
-    return (
-      <div>
-        <Pagination
-          {...args}
-          page={page}
-          onChange={setPage}
-          perPage={+perPage}
-          onPerPageChange={setPerPage}
-          perPageOptions={['10', '20', '60', '80', '100']}
-        />
-        <Typography variant={'body_2'} color={'secondary'}>
-          Current page: {page}
-        </Typography>
-        <Typography variant={'body_2'} color={'secondary'}>
-          Per page: {perPage}
-        </Typography>
-      </div>
-    )
-  },
+  return (
+    <div>
+      <Pagination
+        {...args}
+        page={page}
+        onChange={setPage}
+        perPage={+perPage}
+        onPerPageChange={(value: string) => setPerPage(value)}
+      />
+      <Typography variant="body_2" color="secondary">
+        Current page: {page}
+      </Typography>
+      <Typography variant="body_2" color="secondary">
+        Items per page: {perPage}
+      </Typography>
+    </div>
+  )
 }

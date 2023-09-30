@@ -19,9 +19,9 @@ type ModalProps = {
   children?: ReactNode
 }
 
-const Root: FC<ModalProps> = ({ title, isOpen, trigger, onOpenChange, children }) => {
+const Root: FC<ModalProps> = ({ title, isOpen, trigger, onOpenChange, children, className }) => {
   const classNames = {
-    content: clsx(s.content),
+    content: clsx(s.content, className),
     overlay: clsx(s.overlay),
     body: clsx(s.body),
     footer: clsx(s.footer),

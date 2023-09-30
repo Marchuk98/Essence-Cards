@@ -1,5 +1,6 @@
 import { PageNotFound } from './page-not-found'
 import { Meta, StoryObj } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
 
 const meta = {
   title: 'Pages/Page not found',
@@ -7,7 +8,9 @@ const meta = {
   decorators: [
     Story => (
       <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
-        <Story />
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
       </div>
     ),
   ],

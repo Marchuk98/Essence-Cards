@@ -37,9 +37,6 @@ button {
   justify-content: center;
 
   box-sizing: border-box;
-  width: 36px;
-  height: 36px;
-  padding: 9px;
 
   border-radius: 50%;
 
@@ -96,6 +93,7 @@ button {
 .label {
   cursor: pointer;
   user-select: none;
+  margin-left: 0.5rem;
   color: var(--color-light-100);
 
   .RadioGroupItem[data-disabled] & {

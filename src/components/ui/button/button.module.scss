@@ -70,7 +70,7 @@
   );
 
   &:active {
-    background: var(--color-light-500);
+    background: var(--color-dark-500);
   }
 
   &:hover {
@@ -79,6 +79,7 @@
 
   &:disabled {
     color: var(--color-light-900);
+    opacity: 0.5;
     background: var(--color-dark-300);
   }
 }
@@ -118,14 +119,19 @@
   @include button($color: var(--color-accent-500), $bgColor: none, $boxShadow: none);
 
   border: none;
-  border-radius: 130px;
 
-  &:active {
-    background: var(--color-accent-700);
+  &:focus-visible {
+    &::before {
+      border-radius: 130px;
+    }
   }
 
   &:hover {
-    background: var(--color-accent-300);
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
   }
 
   &:disabled {

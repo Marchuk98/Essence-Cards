@@ -1,6 +1,5 @@
 import { Typography } from '../../ui'
 import { BlurHashCanvas } from '../../ui/image'
-import { useImageOpen } from '../../../common/constants/useImageOpen.ts'
 import { ImageModal } from '../../modals-actions/image-modal'
 
 import s from './question.module.scss'
@@ -9,11 +8,22 @@ type QuestionType = {
   question?: string
   numberEfforts: number
   questionImg?: string
+  image: string
+  isImageModalOpen: boolean
+  openImageInModal: (src: string) => void
+  setImageModalOpen: (value: boolean) => void
 }
 
 export const Question = (props: QuestionType) => {
-  const { question, questionImg, numberEfforts } = props
-  const { openImageInModal, setImageModalOpen, image, isImageModalOpen } = useImageOpen()
+  const {
+    question,
+    questionImg,
+    numberEfforts,
+    image,
+    openImageInModal,
+    setImageModalOpen,
+    isImageModalOpen,
+  } = props
 
   return (
     <div>

@@ -44,6 +44,7 @@ input {
 
   &:disabled {
     color: var(--color-dark-300);
+    opacity: 0.5;
   }
 
   &:focus,
@@ -113,7 +114,7 @@ input {
   color: var(--color-dark-100);
 
   &:has(~ .input:focus) {
-    color: var(--color-light-100);
+    color: var(--color-warning-500);
   }
 }
 
@@ -128,6 +129,10 @@ input {
 
   width: 20px;
   height: 20px;
+}
+
+.iconDisabled {
+  color: var(--color-dark-300);
 }
 
 .clearButton {

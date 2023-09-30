@@ -5,99 +5,108 @@
   justify-content: $justify;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   gap: 0.313rem;
   align-items: flex-start;
 
-.root {
-  display: flex;
-
-  .list {
+  .root {
     display: flex;
-    flex-shrink: 0;
 
-    .tabsTrigger {
-      @include flex(row, center, center);
-
-      all: unset;
-
-      cursor: pointer;
-      user-select: none;
-
-      overflow: hidden;
+    .list {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-shrink: 0;
 
-      box-sizing: border-box;
-      height: 36px;
-      padding: 6px 24px;
+      .tabsTrigger {
+        @include flex(row, center, center);
 
-      font-family: var(--font-family-primary);
-      font-size: var(--font-size-m);
-      line-height: var(--line-height-m);
-      color: var(--color-light-100);
+        all: unset;
 
-      background: var(--color-dark-900);
-      border: 1px solid var(--color-dark-300);
-      border-left: none;
+        cursor: pointer;
+        user-select: none;
 
-      &.fullWidth {
-        width: 100%;
-      }
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      &:last-child {
-        border-radius: 0 2px 2px 0;
-      }
+        box-sizing: border-box;
+        height: 36px;
+        padding: 6px 24px;
 
-      &:first-child {
-        border-left: 1px solid var(--color-dark-300);
-        border-radius: 2px 0 0 2px;
-      }
+        font-family: var(--font-family-primary);
+        font-size: var(--font-size-m);
+        line-height: var(--line-height-m);
+        color: var(--color-light-100);
 
-      &:focus-visible {
-        outline: var(--color-info-900);
-      }
-
-      &:hover {
-        color: var(--color-light-900);
-        background: var(--color-dark-300);
+        background: var(--color-dark-900);
         border: 1px solid var(--color-dark-300);
         border-left: none;
 
+        &.fullWidth {
+          width: 100%;
+        }
+
+        &:last-child {
+          border-radius: 0 2px 2px 0;
+        }
+
         &:first-child {
           border-left: 1px solid var(--color-dark-300);
+          border-radius: 2px 0 0 2px;
         }
-      }
 
-      &[data-state='active'] {
-        z-index: 1;
-        color: var(--color-light-100);
-        background-color: var(--color-accent-500);
-        border-color: var(--color-accent-500);
-      }
+        &:focus-visible {
+          outline: var(--color-info-900);
+        }
 
-      &:focus {
-        z-index: 1;
-        outline: 2px solid var(--color-info-900);
-      }
+        &:hover {
+          color: var(--color-light-900);
+          background: var(--color-dark-300);
+          border: 1px solid var(--color-dark-300);
+          border-left: none;
 
-      &:disabled {
-        pointer-events: none;
-        color: var(--color-dark-300);
-        background: var(--color-dark-700);
-        border-color: var(--color-dark-300);
-      }
+          &:first-child {
+            border-left: 1px solid var(--color-dark-300);
+          }
+        }
 
-      &.disabled {
-        pointer-events: none;
-        color: var(--color-dark-300);
-        background: var(--color-dark-700);
-        border-color: var(--color-dark-300);
+        &[data-state='active'] {
+          color: var(--color-light-100);
+          background-color: var(--color-accent-500);
+          border-color: var(--color-accent-500);
+        }
+
+        &:focus {
+          outline: 2px solid var(--color-info-900);
+        }
+
+        &:disabled {
+          pointer-events: none;
+          color: var(--color-dark-300);
+          background: var(--color-dark-700);
+          border-color: var(--color-dark-300);
+        }
+
+        &.disabled {
+          pointer-events: none;
+          color: var(--color-dark-300);
+          background: var(--color-dark-700);
+          border-color: var(--color-dark-300);
+        }
       }
     }
   }
 }
+
+.label {
+  display: block;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
 }

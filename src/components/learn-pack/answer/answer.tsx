@@ -1,8 +1,8 @@
 import { RadioGroup, Typography } from '../../ui'
 import { BlurHashCanvas } from '../../ui/image'
-import { answersGrade } from './answersGrade.ts'
+import { answersGrade } from './answers-grade.ts'
 import { ImageModal } from '../../modals-actions/image-modal'
-import { useImageOpen } from '../../../common/constants/useImageOpen.ts'
+
 import s from './answer.module.scss'
 
 type AnswerType = {
@@ -10,11 +10,23 @@ type AnswerType = {
   answerImg?: string
   radioValue: string
   setRadioValue: (value: string) => void
+  image: string
+  isImageModalOpen: boolean
+  openImageInModal: (src: string) => void
+  setImageModalOpen: (value: boolean) => void
 }
 
 export const Answer = (props: AnswerType) => {
-  const { answer, answerImg, radioValue, setRadioValue } = props
-  const { openImageInModal, setImageModalOpen, image, isImageModalOpen } = useImageOpen()
+  const {
+    answer,
+    answerImg,
+    radioValue,
+    setRadioValue,
+    image,
+    openImageInModal,
+    setImageModalOpen,
+    isImageModalOpen,
+  } = props
 
   return (
     <div>

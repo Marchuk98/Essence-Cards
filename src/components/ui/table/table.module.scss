@@ -20,7 +20,7 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-m);
 
-  background: var(--color-dark-500);
+  background: var(--color-dark-700);
 
   &.noSort {
     cursor: initial;
@@ -36,7 +36,6 @@
 
   background: var(--color-dark-900);
   border-bottom: 0.06rem solid var(--color-dark-500);
-
 }
 
 .title {
@@ -70,4 +69,3 @@
     color: var(--color-light-900);
   }
 }
-

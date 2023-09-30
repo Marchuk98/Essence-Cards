@@ -1,10 +1,9 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
-import { clsx } from 'clsx'
-import { useCreateBlob } from '../../../common/constants/useBlob.ts'
+import { useCreateBlob } from '../../../common'
 import preview from '../../../assets/images/upload-file.png'
 
-import s from './file-input.module.scss'
+import s from './controlled-file-input.module.scss'
 
 type FileInputPropsType<T extends FieldValues> = {
   variant?: 'small' | 'large' | 'medium'
@@ -14,7 +13,7 @@ type FileInputPropsType<T extends FieldValues> = {
   cover?: string
 } & Omit<UseControllerProps<T>, 'rules' | 'defaultValues' | 'onChange' | 'value' | 'type'>
 
-export const FileInput = <T extends FieldValues>({
+export const ControlledFileInput = <T extends FieldValues>({
   name,
   control,
   children,
@@ -25,16 +24,11 @@ export const FileInput = <T extends FieldValues>({
   ...rest
 }: FileInputPropsType<T>) => {
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const [previewImage, setPreviewImage] = useState<File>()
+  const [previewImage, setPreviewImage] = useState<File | null>()
 
   const {
     field: { onChange, value, ref, ...field },
   } = useController({ name, control })
-
-  const classNames = {
-    size: clsx(`${s[variant ?? '']}`),
-    input: clsx(s.input),
-  }
 
   const { blob } = useCreateBlob(cover ?? preview)
   const myFile = new File([blob ?? ''], 'cover.png', { type: 'image/png' })
@@ -62,15 +56,14 @@ export const FileInput = <T extends FieldValues>({
   return (
     <>
       {withPreview && (
-        <div
-          className={classNames.size}
-          style={{
-            backgroundImage: `url(${previewImage ? URL.createObjectURL(previewImage) : 'preview'})`,
-          }}
+        <img
+          className={s.previewImage}
+          src={previewImage ? URL.createObjectURL(previewImage) : preview}
+          alt="Preview"
         />
       )}
       <input
-        className={classNames.input}
+        className={s.input}
         type="file"
         ref={e => {
           ref(e)

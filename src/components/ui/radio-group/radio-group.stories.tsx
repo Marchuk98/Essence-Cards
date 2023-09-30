@@ -27,17 +27,17 @@ export const Default: Story = {
   },
 }
 
-export const DisabledRadioButton: Story = {
-  render: args => {
-    const [value, setValue] = useState('1')
-
-    return <RadioGroup {...args} value={value} onValueChange={setValue} />
-  },
-  args: {
-    options: [
-      { value: 'value1', label: 'label1' },
-      { value: 'value2', label: 'label2' },
-      { value: 'value3', label: 'label3', disabled: true },
-    ],
-  },
-}
+// export const DisabledRadioButton: Story = {
+//   render: args => {
+//     const [value, setValue] = useState('1')
+//
+//     return <RadioGroup {...args} value={value} onValueChange={setValue} />
+//   },
+//   args: {
+//     options: [
+//       { value: 'value1', label: 'label1' },
+//       { value: 'value2', label: 'label2' },
+//       { value: 'value3', label: 'label3', disabled: true },
+//     ],
+//   },
+// }

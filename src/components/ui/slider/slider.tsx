@@ -36,18 +36,23 @@ export const Slider = (props: SliderProps) => {
   } = props
 
   const classNames = {
-    container: clsx(s.container, className),
+    container: clsx(s.container, className, disabled ? s.disabled : ''),
     wrapper: clsx(s.wrapper),
     value: clsx(s.value),
     root: clsx(s.SliderRoot),
     track: clsx(s.SliderTrack),
     range: clsx(s.SliderRange),
     thumb: clsx(s.SliderThumb),
+    label: clsx(s.label),
   }
 
   return (
     <div className={classNames.container}>
-      {label && <Typography variant={'body_1'}>{label}</Typography>}
+      {label && (
+        <Typography variant={'body_1'} className={classNames.label}>
+          {label}
+        </Typography>
+      )}
       <div className={classNames.wrapper}>
         <div className={classNames.value}>{minValue}</div>
         <SliderRadix.Root
