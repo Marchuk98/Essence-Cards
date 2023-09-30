@@ -1,11 +1,12 @@
 import { Button, Card, GradeType, Typography } from '../ui'
 import { useState } from 'react'
-import { Question } from './question/question.tsx'
-import { Answer } from './answer/answer.tsx'
+import { Question } from './question'
+import { Answer } from './answer'
 
 import s from './learn-pack.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeftIcon } from '../../assets/icons'
+import { useImageOpen } from '../../common/constants/useImageOpen.ts'
 
 type LearnPackType = {
   packName: string
@@ -22,6 +23,7 @@ export const LearnPack = (props: LearnPackType) => {
     props
   const [showAnswer, setShowAnswer] = useState<boolean>(false)
   const [radioValue, setRadioValue] = useState('1')
+  const imageHookProps = useImageOpen()
   const navigate = useNavigate()
   const handleNextQuestion = () => {
     setShowAnswer(false)
@@ -39,13 +41,19 @@ export const LearnPack = (props: LearnPackType) => {
         <Typography variant={'large'} className={s.title}>
           {packName}
         </Typography>
-        <Question numberEfforts={numberEfforts} question={question} questionImg={questionImg} />
+        <Question
+          numberEfforts={numberEfforts}
+          question={question}
+          questionImg={questionImg}
+          {...imageHookProps}
+        />
         {showAnswer && (
           <Answer
             answer={answer}
             answerImg={answerImg}
             radioValue={radioValue}
             setRadioValue={setRadioValue}
+            {...imageHookProps}
           />
         )}
         {!showAnswer ? (
