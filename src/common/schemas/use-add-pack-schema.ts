@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 const MAX_FILE_SIZE = 500000
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
 
-export const schema = z.object({
+export const addPackSchema = z.object({
   name: z
     .string()
     .trim()
@@ -22,11 +22,11 @@ export const schema = z.object({
     ),
 })
 
-export type AddPackForm = z.infer<typeof schema>
+export type AddPackForm = z.infer<typeof addPackSchema>
 
 export const useAddPackForm = () => {
   return useForm<AddPackForm>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(addPackSchema),
     mode: 'onSubmit',
     defaultValues: {
       name: '',

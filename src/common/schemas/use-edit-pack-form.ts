@@ -1,11 +1,9 @@
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 const MAX_FILE_SIZE = 500000
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
 
-export const schema = z.object({
+export const editPackSchema = z.object({
   name: z
     .string()
     .trim()
@@ -22,20 +20,3 @@ export const schema = z.object({
     ),
 })
 
-export type EditPackForm = z.infer<typeof schema>
-
-export const useEditPackForm = (
-  initialPackName: string,
-  initialIsPrivate: boolean,
-  initialCover: string
-) => {
-  return useForm<EditPackForm>({
-    resolver: zodResolver(schema),
-    mode: 'onSubmit',
-    defaultValues: {
-      name: initialPackName,
-      isPrivate: initialIsPrivate,
-      cover: initialCover,
-    },
-  })
-}
