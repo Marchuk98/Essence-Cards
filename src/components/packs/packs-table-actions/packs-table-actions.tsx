@@ -7,22 +7,16 @@ import {
   useDeletePackMutation,
   useUpdatePackMutation,
 } from '../../../services/packs/packs-endpoints/packs.api.ts'
+import { packItem } from '../../../services/packs/packs-endpoints/packs.types.ts'
 
-import s from './table-action-button.module.scss'
-
-export type packItem = {
-  id: string
-  name: string
-  isPrivate: boolean
-  cover: string | undefined
-}
+import s from './packs-table-actions.module.scss'
 
 type TableActionButtonProps = {
   isActiveActions?: boolean
   pack: packItem
 }
 
-export const TableActionButton = (props: TableActionButtonProps) => {
+export const PacksTableActions = (props: TableActionButtonProps) => {
   const { pack, isActiveActions = false } = props
   const navigate = useNavigate()
   const [updatePack] = useUpdatePackMutation()
@@ -31,13 +25,17 @@ export const TableActionButton = (props: TableActionButtonProps) => {
   const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
 
+  const handleUpdatePack = (data: FormData) => {
+    updatePack({ id: pack.id, formData: data })
+  }
+
   const removePackHandler = () => {
     removePack({ id: pack.id })
   }
 
   return (
     <div className={s.container}>
-      <button className={s.styleBtn} onClick={() => navigate(PATH.LEARN)}>
+      <button className={s.styleBtn} onClick={() => navigate(`${PATH.LEARN}/${pack.id}`)}>
         <Play />
       </button>
       {isActiveActions && (
@@ -45,14 +43,7 @@ export const TableActionButton = (props: TableActionButtonProps) => {
           <EditPackModal
             title={'Edit Pack'}
             trigger={<></>}
-            onSubmitHandler={({ name, isPrivate, cover }) => {
-              const form = new FormData()
-
-              form.append('name', name)
-              form.append('isPrivate', String(isPrivate))
-              form.append('cover', cover)
-              updatePack({ id: pack.id, formData: form })
-            }}
+            onSubmitHandler={data => handleUpdatePack(data)}
             setIsOpenEditPack={setEditModalOpen}
             isOpenEditPack={isEditModalOpen}
             cover={pack.cover || ''}
