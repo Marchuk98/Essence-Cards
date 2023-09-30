@@ -1,14 +1,13 @@
 import { Pagination, Table, Typography } from '../ui'
-import { CardsTableBody } from './cards-table/cards-table-body.tsx'
+import { CardsTableBody } from './cards-table'
 import { useCards } from '../../services/cards/hooks/useCards.ts'
-import { PackControlPanel } from './pack-control-panel/pack-control-panel.tsx'
-import { ImageModal } from '../modals-actions/image-modal/image-modal.tsx'
+import { PackControlPanel } from './pack-control-panel'
+import { ImageModal } from '../modals-actions/image-modal'
 import { useImageOpen } from '../../common/constants/useImageOpen.ts'
 import { useDispatch } from 'react-redux'
 import { cardsActions } from '../../services/cards/cards-endpoints/cards.params.slice.ts'
 
 import s from './cards-main.module.scss'
-import { MainLoader } from '../../assets/loaders/main-loader'
 
 export const CardsMain = () => {
   const {
@@ -31,7 +30,7 @@ export const CardsMain = () => {
     question,
     setQuestion,
     status,
-    isLoading,
+    isFetching,
     isMe,
     handleCreateCard,
     handleUpdatePack,
@@ -41,8 +40,6 @@ export const CardsMain = () => {
 
   const { openImageInModal, setImageModalOpen, image, isImageModalOpen } = useImageOpen()
   const dispatch = useDispatch()
-
-  if (isLoading) return <MainLoader />
 
   return (
     <>
@@ -67,6 +64,8 @@ export const CardsMain = () => {
         setQuestion={setQuestion}
         openImageInModal={openImageInModal}
         isDisplayData={isDisplayData}
+        isFetching={isFetching}
+        cardsData={cardsData}
         status={status}
       />
 
@@ -83,33 +82,29 @@ export const CardsMain = () => {
                 })
               }}
             />
-
             <CardsTableBody
               cardContent={cardsData?.items}
               isMe={isMe}
-              isMyPack={isMe}
               openImageInModal={openImageInModal}
+              isFetching={isFetching}
             />
           </Table.Root>
         </>
       )}
 
+      <Pagination
+        onChange={setPage}
+        totalCount={totalCount}
+        siblings={3}
+        perPage={perPage || 10}
+        page={page || 1}
+        onPerPageChange={setPerPage}
+        perPageOptions={['3', '5', '10']}
+      />
       {isEmptyPack && (
         <Typography variant={'h2'} className={s.emptyPack}>
           {question ? 'No cards found' : 'Pack is empty'}
         </Typography>
-      )}
-
-      {cardsData && !isEmptyPack && (
-        <Pagination
-          onChange={setPage}
-          totalCount={totalCount}
-          siblings={3}
-          perPage={perPage || 10}
-          page={page || 1}
-          onPerPageChange={setPerPage}
-          perPageOptions={['3', '5', '10']}
-        />
       )}
     </>
   )
