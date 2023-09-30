@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Edit } from '../../../assets/icons'
 
-import s from '../../ui/table-action-button/cards-table-actions/cards-table-actions.module.scss'
+import s from '../../cards/cards-table-actions/cards-table-actions.module.scss'
 
 const meta = {
   title: 'Actions/Modals/Edit Card Modal',

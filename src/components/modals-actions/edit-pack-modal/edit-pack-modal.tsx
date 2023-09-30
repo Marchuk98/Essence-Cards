@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { editPackSchema } from '../../../common'
-import { Button, FileInput, Modal, Typography } from '../../ui'
+import { Button, ControlledFileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../assets/icons'
 import { z } from 'zod'
@@ -61,14 +61,14 @@ export const EditPackModal = (props: EditPackModalType) => {
     >
       <form onSubmit={onSubmit}>
         <Modal.Body>
-          <FileInput variant={'large'} cover={cover} name={'cover'} withPreview control={control}>
+          <ControlledFileInput variant={'large'} cover={cover} name={'cover'} withPreview control={control}>
             {onClick => (
               <Button type={'button'} variant={'secondary'} onClick={onClick}>
                 <ChangeCover />
                 <Typography variant={'subtitle_2'}>Change Cover</Typography>
               </Button>
             )}
-          </FileInput>
+          </ControlledFileInput>
           <ControlledTextField label={'Name Pack'} type={'text'} control={control} name={'name'} />
           <ControlledCheckbox control={control} label={'Private Pack'} name={'isPrivate'} />
         </Modal.Body>

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Button, FileInput, Modal, Typography } from '../../ui'
+import { Button, ControlledFileInput, Modal, Typography } from '../../ui'
 import { ControlledCheckbox, ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../assets/icons'
 import { useAddPackForm } from '../../../common'
@@ -52,14 +52,14 @@ export const AddPackModal = (props: AddPackModalType) => {
     >
       <form onSubmit={onSubmit}>
         <Modal.Body>
-          <FileInput variant={'large'} name={'cover'} withPreview={true} control={control}>
+          <ControlledFileInput variant={'large'} name={'cover'} withPreview={true} control={control}>
             {onClick => (
               <Button type={'button'} variant={'secondary'} onClick={onClick}>
                 <ChangeCover />
                 Change cover
               </Button>
             )}
-          </FileInput>
+          </ControlledFileInput>
           <ControlledTextField label={'Name Pack'} type={'text'} control={control} name={'name'} />
           <ControlledCheckbox control={control} label={'Private Pack'} name={'isPrivate'} />
         </Modal.Body>

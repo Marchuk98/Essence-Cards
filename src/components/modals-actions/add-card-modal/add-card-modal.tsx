@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, FileInput, Modal, Select, Typography } from '../../ui'
+import { Button, ControlledFileInput, Modal, Select, Typography } from '../../ui'
 import { ControlledTextField } from '../../controlled'
 import { ChangeCover } from '../../../assets/icons'
 
@@ -55,22 +55,22 @@ export const AddCardModal = (props: AddCardModalType) => {
       </>
     ) : (
       <>
-        <FileInput withPreview name={'questionImg'} control={control}>
+        <ControlledFileInput withPreview name={'questionImg'} control={control}>
           {onClick => (
             <Button variant={'secondary'} onClick={onClick} type={'button'}>
               <ChangeCover />
               Change cover
             </Button>
           )}
-        </FileInput>
-        <FileInput withPreview name={'answerImg'} control={control}>
+        </ControlledFileInput>
+        <ControlledFileInput withPreview name={'answerImg'} control={control}>
           {onClick => (
             <Button variant={'secondary'} onClick={onClick} type={'button'}>
               <ChangeCover />
               Change cover
             </Button>
           )}
-        </FileInput>
+        </ControlledFileInput>
       </>
     )
 
