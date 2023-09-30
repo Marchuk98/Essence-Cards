@@ -1,7 +1,7 @@
 import { useCreatePackMutation, useGetPacksQuery } from '../packs-endpoints/packs.api.ts'
 import { useGetMeQuery } from '../../auth'
 import { useState } from 'react'
-import { useDebounce } from '../../../common/constants/useDebounce.ts'
+import { useDebounce, useSort } from '../../../common'
 import { useAppDispatch, useAppSelector } from '../../../app/store.ts'
 import {
   selectPackAuthorId,
@@ -13,7 +13,6 @@ import {
   selectPackOrderBy,
 } from '../packs-endpoints/packs.params.selectors.ts'
 import { packsActions } from '../packs-endpoints/packs.params.slice.ts'
-import { useSort } from '../../../common/constants/useSort.ts'
 
 export const usePacks = () => {
   const { setSort, sort, setSortValue } = useSort()
@@ -23,6 +22,7 @@ export const usePacks = () => {
 
   const [sliderValues, setSliderValues] = useState<[number, number]>([0, 100])
   const dispatch = useAppDispatch()
+  const status = useAppSelector(state => state.appReducer.status)
   const searchQuery = useAppSelector(selectPackName)
   const myPacks = useAppSelector(selectPackAuthorId)
   const orderBy = useAppSelector(selectPackOrderBy)
@@ -32,7 +32,11 @@ export const usePacks = () => {
   const max = useAppSelector(selectPackMaxCardsCount)
   const debounceSearch = useDebounce(searchQuery, 500)
 
-  const { data: packsData } = useGetPacksQuery({
+  const {
+    data: packsData,
+    isLoading,
+    isFetching,
+  } = useGetPacksQuery({
     minCardsCount: min,
     maxCardsCount: max,
     name: debounceSearch,
@@ -42,12 +46,13 @@ export const usePacks = () => {
     itemsPerPage: perPage,
   })
 
-  const totalCount = packsData?.pagination.totalItems ?? 0
+  const totalCount = packsData?.pagination.totalPages || 0
+
   const setSearchQuery = (searchQuery: string) => {
     dispatch(packsActions.setQueryParams({ name: searchQuery }))
   }
   const setMyPacks = (id: string) => {
-    dispatch(packsActions.setQueryParams({ authorId: id }))
+    dispatch(packsActions.setQueryParams({ authorId: id, currentPage: 1 }))
   }
 
   const setPage = (page: number) => {
@@ -65,7 +70,6 @@ export const usePacks = () => {
   const resetFilters = () => {
     setSearchQuery('')
     setMyPacks('')
-    setSortValue(null)
     dispatch(packsActions.setQueryParams({ orderBy: '' }))
     setSort(null)
     if (packsData) {
@@ -75,6 +79,9 @@ export const usePacks = () => {
   }
 
   return {
+    isFetching,
+    isLoading,
+    status,
     isMe,
     myPacks,
     searchQuery,
