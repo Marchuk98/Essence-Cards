@@ -16,8 +16,11 @@ export default {
 } as Meta
 
 export const Default: Story<PaginationProps> = args => {
-  const [page, setPage] = useState(args.page)
-  const [perPage, setPerPage] = useState(args.perPage.toString())
+  const initialPage = args.page || 1
+  const initialPerPage = args.perPage ? args.perPage.toString() : '10'
+
+  const [page, setPage] = useState(initialPage)
+  const [perPage, setPerPage] = useState(initialPerPage)
 
   return (
     <div>

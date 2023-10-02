@@ -68,6 +68,7 @@ export const PackTableBody = ({ packContent, isMe, isFetching }: PackTableBodyTy
               <Skeleton width={70} height={24} />
             ) : (
               <PacksTableActions
+                packContent={packContent}
                 isActiveActions={item.userId === isMe}
                 pack={{
                   id: item.id,

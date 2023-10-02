@@ -80,9 +80,4 @@ export type GradesParamsCardType = {
   grade: GradeType
 }
 
-export type packItem = {
-  id: string
-  name: string
-  isPrivate: boolean
-  cover: string | undefined
-}
+export type packItem = Pick<PackType, 'id' | 'name' | 'isPrivate' | 'cover'>
