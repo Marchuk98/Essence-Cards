@@ -27,6 +27,7 @@ export const Default: Story = {
           setSearch={value => console.log(value)}
           isMe={''}
           myPack={''}
+          status={'succeeded'}
         />
       </>
     )

@@ -1,6 +1,6 @@
 import { ImgHTMLAttributes, useEffect, useState } from 'react'
 
-import { BlurhashCanvas } from 'react-blurhash'
+import { BlurhashCanvas as ImportedBlurHashCanvas } from 'react-blurhash'
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string
@@ -24,7 +24,7 @@ export const BlurHashCanvas = ({ src, alt, blurHeight, blurWidth, ...props }: Im
   return (
     <>
       <div style={{ display: imageLoaded ? 'none' : 'inline' }}>
-        <BlurhashCanvas
+        <ImportedBlurHashCanvas
           style={{ borderRadius: '2px' }}
           hash="L37nC1M_00s?-BaepJX50cog^nWA"
           width={blurWidth}

@@ -1,10 +1,10 @@
 import { Layout } from '../components/layout'
-import { ThemeToogle } from '../components/ui/theme-toogle'
+import { ThemeToggle } from '../components/ui/theme-toogle'
 
 export function App() {
   return (
     <>
-      <ThemeToogle />
+      <ThemeToggle />
       <Layout />
     </>
   )
