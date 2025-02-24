@@ -43,5 +43,3 @@ export const Checkbox_With_Label: Story = {
     label: 'Click here',
   },
 }
-
-

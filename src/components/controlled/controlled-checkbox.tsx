@@ -22,11 +22,6 @@ export const ControlledCheckbox = <T extends FieldValues>({
   const handleChange = onChange as (value: boolean) => void
 
   return (
-    <Checkbox
-      checked={value}
-      onChange={handleChange}
-      errorMessage={error?.message}
-      {...rest}
-    />
+    <Checkbox checked={value} onChange={handleChange} errorMessage={error?.message} {...rest} />
   )
 }

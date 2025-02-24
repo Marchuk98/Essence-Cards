@@ -1,6 +1,32 @@
 import { ResponseUserType } from '../../auth'
 import { GradeType } from '../../../components/ui'
 
+export type OrderByPacksType =
+  | null
+  | 'cardsCount-asc'
+  | 'updated-asc'
+  | 'name-asc'
+  | 'author.name-asc'
+  | 'created-asc'
+  | 'cardsCount-desc'
+  | 'updated-desc'
+  | 'name-desc'
+  | 'author.name-desc'
+  | 'created-desc'
+
+export type OrderByCardsType =
+  | null
+  | 'question-asc'
+  | 'question-desc'
+  | 'answer-asc'
+  | 'answer-desc'
+  | 'created-asc'
+  | 'created-desc'
+  | 'grade-asc'
+  | 'grade-desc'
+  | 'updated-asc'
+  | 'updated-desc'
+
 type PackAuthorType = Pick<ResponseUserType, 'id' | 'name'>
 
 export type PackType = {
@@ -35,7 +61,7 @@ export type GetParamsPacksType = {
   maxCardsCount?: number
   name?: string
   authorId?: string
-  orderBy?: string
+  orderBy?: OrderByPacksType
   currentPage?: number
   itemsPerPage?: number
 }
@@ -69,7 +95,7 @@ export type GetCardsRequestType = {
   id?: string
   question?: string
   answer?: string
-  orderBy?: string
+  orderBy?: OrderByCardsType
   currentPage?: number
   itemsPerPage?: number
 }

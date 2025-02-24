@@ -1,7 +1,14 @@
 import { SVGProps, memo } from 'react'
 
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg width={95} height={95} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
+  <svg
+    width={95}
+    height={95}
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    {...props}
+  >
     <path
       fill="#8C61FF"
       fillOpacity={0.05}

@@ -12,7 +12,7 @@ const initialState: initialStateType = {
     maxCardsCount: undefined,
     name: '',
     authorId: '',
-    orderBy: '',
+    orderBy: null,
     currentPage: 1,
     itemsPerPage: 10,
   },

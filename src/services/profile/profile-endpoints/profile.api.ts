@@ -7,7 +7,7 @@ export const profileApi = commonApi.injectEndpoints({
       query: body => {
         return {
           method: 'PATCH',
-          url: 'auth/me',
+          url: 'v1/auth/me',
           body,
         }
       },

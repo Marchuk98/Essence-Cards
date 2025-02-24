@@ -18,7 +18,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: params => {
         return {
           method: 'GET',
-          url: 'decks',
+          url: 'v2/decks',
           params,
         }
       },
@@ -28,7 +28,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: body => {
         return {
           method: 'POST',
-          url: 'decks',
+          url: 'v1/decks',
           body,
         }
       },
@@ -38,7 +38,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'GET',
-          url: `decks/${id}`,
+          url: `v1/decks/${id}`,
         }
       },
       providesTags: ['UPDATE_PACKS'],
@@ -47,7 +47,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: data => {
         return {
           method: 'PATCH',
-          url: `decks/${data.id}`,
+          url: `v1/decks/${data.id}`,
           body: data.formData,
         }
       },
@@ -57,7 +57,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: param => {
         return {
           method: 'DELETE',
-          url: `decks/${param.id}`,
+          url: `v1/decks/${param.id}`,
         }
       },
       invalidatesTags: ['UPDATE_PACKS'],
@@ -68,7 +68,7 @@ export const packsApi = commonApi.injectEndpoints({
 
         return {
           method: 'GET',
-          url: `decks/${id}/cards`,
+          url: `v1/decks/${id}/cards`,
           params: params,
         }
       },
@@ -78,7 +78,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: ({ id, data }) => {
         return {
           method: 'POST',
-          url: `decks/${id}/cards`,
+          url: `v1/decks/${id}/cards`,
           body: data,
         }
       },
@@ -88,7 +88,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'GET',
-          url: `decks/${id}/learn`,
+          url: `v1/decks/${id}/learn`,
         }
       },
       providesTags: ['LEARN_CARD'],
@@ -97,7 +97,7 @@ export const packsApi = commonApi.injectEndpoints({
       query: ({ id, ...body }) => {
         return {
           method: 'POST',
-          url: `decks/${id}/learn`,
+          url: `v1/decks/${id}/learn`,
           body,
         }
       },

@@ -17,7 +17,6 @@ type CardTableBodyType = {
 
 export const CardsTableBody = memo(
   ({ cardContent, openImageInModal, isMe, isFetching }: CardTableBodyType) => {
-
     return (
       <Table.Body>
         {cardContent?.map(item => (

@@ -84,4 +84,3 @@ export const PackTableBody = ({ packContent, isMe, isFetching }: PackTableBodyTy
     </Table.Body>
   )
 }
-

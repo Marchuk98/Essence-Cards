@@ -21,7 +21,7 @@ import { toast } from 'react-toastify'
 import { columns } from '../../../components/cards/cards-table/columns-card-table.ts'
 
 export const useCards = () => {
-  const { sort, setSort, setSortValue } = useSort()
+  const { sort, setSort } = useSort({ type: 'cards' })
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -41,16 +41,13 @@ export const useCards = () => {
   const [updatePack] = useUpdatePackMutation()
   const [removePack] = useDeletePackMutation()
 
-  const {
-    data: cardsData,
-    isFetching,
-  } = useGetCardsQuery({
+  const { data: cardsData, isFetching } = useGetCardsQuery({
     id: packId,
     answer: debounceAnswer,
     question: question,
     itemsPerPage: perPage,
     currentPage: page,
-    orderBy,
+    orderBy: orderBy,
   })
 
   const packName = packData?.name || 'Friends Pack'
@@ -104,7 +101,6 @@ export const useCards = () => {
     packId,
     sort,
     setSort,
-    setSortValue,
     setPage,
     setPerPage,
     setQuestion,

@@ -16,7 +16,7 @@ export const authApi = commonApi.injectEndpoints({
       query: () => {
         return {
           method: 'GET',
-          url: 'auth/me',
+          url: 'v1/auth/me',
         }
       },
       extraOptions: { maxRetries: 0 },
@@ -26,7 +26,7 @@ export const authApi = commonApi.injectEndpoints({
       query: body => {
         return {
           method: 'POST',
-          url: 'auth/login',
+          url: 'v1/auth/login',
           body,
         }
       },
@@ -36,7 +36,7 @@ export const authApi = commonApi.injectEndpoints({
       query: body => {
         return {
           method: 'POST',
-          url: 'auth/sign-up',
+          url: 'v1/auth/sign-up',
           body,
         }
       },
@@ -45,7 +45,7 @@ export const authApi = commonApi.injectEndpoints({
       query: body => {
         return {
           method: 'POST',
-          url: 'auth/recover-password',
+          url: 'v1/auth/recover-password',
           body,
         }
       },
@@ -54,7 +54,7 @@ export const authApi = commonApi.injectEndpoints({
       query: ({ token, password }) => {
         return {
           method: 'POST',
-          url: `auth/reset-password/${token}`,
+          url: `v1/auth/reset-password/${token}`,
           body: { password },
         }
       },
@@ -63,7 +63,7 @@ export const authApi = commonApi.injectEndpoints({
       query: () => {
         return {
           method: 'POST',
-          url: 'auth/logout',
+          url: 'v1/auth/logout',
         }
       },
     }),
@@ -71,7 +71,7 @@ export const authApi = commonApi.injectEndpoints({
       query: (body: { code: string }) => {
         return {
           method: 'POST',
-          url: `auth/verify-email`,
+          url: `v1/auth/verify-email`,
           body,
         }
       },
@@ -80,7 +80,7 @@ export const authApi = commonApi.injectEndpoints({
       query: (body: { userId: string; html: string }) => {
         return {
           method: 'POST',
-          url: `auth/resend-verification-email`,
+          url: `v1/auth/resend-verification-email`,
           body,
         }
       },
@@ -99,5 +99,3 @@ export const {
   useResendEmailMutation,
   util,
 } = authApi
-
-

@@ -1,8 +1,5 @@
 import { Button } from '../button'
-import {
-  ProfileFieldForm,
-  UseProfileFieldForm,
-} from '../../../common'
+import { ProfileFieldForm, UseProfileFieldForm } from '../../../common'
 import { ControlledTextField } from '../../controlled'
 
 import s from './editable-text-field.module.scss'
@@ -34,5 +31,3 @@ export const EditableTextField = (props: EditableTextFieldType) => {
     </form>
   )
 }
-
-

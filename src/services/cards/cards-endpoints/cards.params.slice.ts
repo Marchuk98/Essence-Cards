@@ -11,7 +11,7 @@ const initialState: initialStateType = {
     id: '',
     question: '',
     answer: '',
-    orderBy: '',
+    orderBy: null,
     currentPage: 1,
     itemsPerPage: 10,
   },

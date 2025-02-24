@@ -1,30 +1,30 @@
- .emptyPack {
-    padding: 36px 0;
-    font-size: 2rem;
-    color: var(--color-dark-300);
-    text-align: center;
-  }
+.emptyPack {
+  padding: 36px 0;
+  font-size: 2rem;
+  color: var(--color-dark-300);
+  text-align: center;
+}
 
-  .tableRoot {
-    width: 100%;
-    margin-bottom: 25px;
-  }
+.tableRoot {
+  width: 100%;
+  margin-bottom: 25px;
+}
 
-  .cellContent {
-    cursor: pointer;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
+.cellContent {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
-  .cellText {
-    max-width: 150px;
-    word-break: break-word;
-  }
+.cellText {
+  max-width: 150px;
+  word-break: break-word;
+}
 
-  .cellImgContent {
-    height: 48px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 0.125rem;
-  }
+.cellImgContent {
+  height: 48px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.125rem;
+}

@@ -1,11 +1,9 @@
-import { Pagination, Table, Typography } from '../ui'
+import { Pagination, Sort, Table, Typography } from '../ui'
 import { CardsTableBody } from './cards-table'
 import { useCards } from '../../services/cards/hooks/useCards.ts'
 import { PackControlPanel } from './pack-control-panel'
 import { ImageModal } from '../modals-actions/image-modal'
 import { useImageOpen } from '../../common/constants/useImageOpen.ts'
-import { useDispatch } from 'react-redux'
-import { cardsActions } from '../../services/cards/cards-endpoints/cards.params.slice.ts'
 
 import s from './cards-main.module.scss'
 
@@ -13,7 +11,6 @@ export const CardsMain = () => {
   const {
     sort,
     setSort,
-    setSortValue,
     setPage,
     setPerPage,
     totalCount,
@@ -39,7 +36,6 @@ export const CardsMain = () => {
   } = useCards()
 
   const { openImageInModal, setImageModalOpen, image, isImageModalOpen } = useImageOpen()
-  const dispatch = useDispatch()
 
   return (
     <>
@@ -75,11 +71,8 @@ export const CardsMain = () => {
             <Table.Head
               columns={preparedColumns}
               sort={sort}
-              onSort={newSort => {
+              onSort={(newSort: Sort) => {
                 setSort(newSort)
-                setSortValue(newSort, sortValue => {
-                  dispatch(cardsActions.setQueryParams({ orderBy: sortValue }))
-                })
               }}
             />
             <CardsTableBody
@@ -109,4 +102,3 @@ export const CardsMain = () => {
     </>
   )
 }
-

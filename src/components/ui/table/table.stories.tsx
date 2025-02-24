@@ -144,4 +144,3 @@ export const Data_Cell_With_Grade: Story = {
     ),
   },
 }
-

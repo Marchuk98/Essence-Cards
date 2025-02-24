@@ -14,19 +14,17 @@
   .filterPanel {
     margin-top: 15px;
     margin-bottom: 35px;
-
   }
 
-  .emptyFindPack{
+  .emptyFindPack {
     padding: 36px 0;
     font-size: 2rem;
     color: var(--color-dark-300);
     text-align: center;
   }
 
-  .skeletonPagination{
+  .skeletonPagination {
     display: flex;
     justify-content: center;
   }
-
 }

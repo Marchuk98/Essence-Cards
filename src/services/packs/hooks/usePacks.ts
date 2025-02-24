@@ -15,7 +15,7 @@ import {
 import { packsActions } from '../packs-endpoints/packs.params.slice.ts'
 
 export const usePacks = () => {
-  const { setSort, sort, setSortValue } = useSort()
+  const { setSort, sort } = useSort({ type: 'packs' })
   const { data: authData } = useGetMeQuery()
   const [createPack] = useCreatePackMutation()
   const isMe = authData?.id
@@ -70,7 +70,7 @@ export const usePacks = () => {
   const resetFilters = () => {
     setSearchQuery('')
     setMyPacks('')
-    dispatch(packsActions.setQueryParams({ orderBy: '' }))
+    dispatch(packsActions.setQueryParams({ orderBy: null }))
     setSort(null)
     if (packsData) {
       setSliderValues([0, packsData.maxCardsCount])
@@ -91,7 +91,6 @@ export const usePacks = () => {
     packsData,
     sort,
     setSort,
-    setSortValue,
     setSearchQuery,
     setMyPacks,
     setPage,

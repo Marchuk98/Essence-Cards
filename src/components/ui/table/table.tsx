@@ -116,7 +116,9 @@ const HeadCell: FC<HeadCellProps> = ({
   return (
     <th className={classNames.th} {...rest} onClick={handleClick}>
       <div className={classNames.title}>
-        <Typography variant={'subtitle_2'} className={classNames.text}>{title}</Typography>
+        <Typography variant={'subtitle_2'} className={classNames.text}>
+          {title}
+        </Typography>
         <div className={classNames.icon}>{showSortIcon && <ChevronDown />}</div>
       </div>
     </th>

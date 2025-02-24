@@ -19,4 +19,3 @@ export const editPackSchema = z.object({
       'Only .jpg, .jpeg, .png and .webp formats are supported.'
     ),
 })
-

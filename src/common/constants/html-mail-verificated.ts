@@ -22,7 +22,7 @@ export const htmlCodeVerificationMail = `
                 <td style="padding-top: 40px; padding-bottom: 40px; padding-left: 10px; padding-right: 10px; text-align: center;">
                     <h1 style="font-size: 40px; font-weight: 100; margin-bottom: 20px; color: #6759fb;">Verify your email address</h1>
                     <p style="font-size: 20px; margin-bottom: 30px; line-height: 26px;">In order to start using your Essence Cards account, you need to confirm your email address.<br> Click the button below to verify your email and continue working.</p>
-                    <a href="http://localhost:3000/confirm-email/##token##" style="margin-bottom: 30px; display: inline-block; background: #6759fb; color: #fff; text-decoration: none; padding: 20px 30px; border-radius: 10px; font-size: 20px;">Verify email address</a>
+                    <a href="https://essence-cards.vercel.app/confirm-email/##token##" style="margin-bottom: 30px; display: inline-block; background: #6759fb; color: #fff; text-decoration: none; padding: 20px 30px; border-radius: 10px; font-size: 20px;">Verify email address</a>
                     <p style="color: #777777;">Essence cards is currently only supported on desktops.</p>
                 </td>
             </tr>
@@ -38,4 +38,4 @@ export const htmlCodeVerificationMail = `
     </div>
 </body>
 
-</html>`;
+</html>`

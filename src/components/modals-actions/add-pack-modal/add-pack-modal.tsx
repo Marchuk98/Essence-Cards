@@ -52,7 +52,12 @@ export const AddPackModal = (props: AddPackModalType) => {
     >
       <form onSubmit={onSubmit}>
         <Modal.Body>
-          <ControlledFileInput variant={'large'} name={'cover'} withPreview={true} control={control}>
+          <ControlledFileInput
+            variant={'large'}
+            name={'cover'}
+            withPreview={true}
+            control={control}
+          >
             {onClick => (
               <Button type={'button'} variant={'secondary'} onClick={onClick}>
                 <ChangeCover />

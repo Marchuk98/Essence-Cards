@@ -26,18 +26,18 @@ export const baseQueryWithReauth: BaseQueryFn<
       try {
         const refreshResult = await baseQuery(
           {
-            url: 'auth/refresh-token',
+            url: 'v1/auth/refresh-token',
             method: 'POST',
           },
           api,
           extraOptions
         )
-        if (refreshResult.meta?.response?.status === 201) {
+        if (refreshResult.meta?.response?.status === 204) {
           result = await baseQuery(args, api, extraOptions)
         } else {
           await baseQuery(
             {
-              url: 'auth/logout',
+              url: 'v1/auth/logout',
               method: 'POST',
             },
             api,
